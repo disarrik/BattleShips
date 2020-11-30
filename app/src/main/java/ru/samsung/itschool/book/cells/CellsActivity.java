@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.GridLayout;
 
 
+import java.util.Random;
+
 import task.Stub;
 import task.Task;
 
@@ -34,15 +36,21 @@ public class CellsActivity extends Activity implements OnClickListener,
     private boolean[][] openStatusEnemy;
     private Button[][] cellsEnemy;
     private Button[][] cells;
+    // изменения от Железнова
+    // массив для всех чисел доски игрока, чтобы бот рандомно выбирал из оставшихся
+    // проверка на попадание ботом в пред. раз
+    private int sum_hit=0;
+    private boolean[][] bot_turn;
+    private boolean hit = false;
+    private int temp_turn_i;
+    private int temp_turn_j;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cells);
         makeCells();
-
         generate();
-
     }
 
     void generate() {
@@ -115,7 +123,62 @@ public class CellsActivity extends Activity implements OnClickListener,
 
     protected boolean checkWin() { return false;}
 
-    protected void botTurn() {}
+    int [] generate_mas_for_bot_turn(){
+        int sum=0;
+        for (int i=1; i<HEIGHT; i++){
+            for (int j=1; j<WIDTH; j++){
+                if (!openStatus[i][j])
+                    sum++;
+            }
+        }
+        int [] mas_check_for_bot=new int [sum];
+        sum=0;
+        for (int i=1; i<HEIGHT; i++){
+            for (int j=1; j<WIDTH; j++){
+                if (!openStatus[i][j]){
+                    mas_check_for_bot[sum]=i*10+j;
+                    sum++;
+                }
+            }
+        }
+        return mas_check_for_bot;
+    }
+
+    int choose_tap(){
+        int len=0;
+        Random random = new Random();
+        if (temp_turn_i>1 && temp_turn_j>1)
+            len=4;
+        int k= random.nextInt(len);
+    }
+    protected void botTurn() {
+
+        int [] mas_check_for_bot=generate_mas_for_bot_turn();
+        if (hit){
+            if (sum_hit>1){
+
+            }
+            else{
+                if(temp_turn_i>1 && temp_turn_i>1){
+                    choose_tap();
+                }
+            }
+        } else{
+            Random random = new Random();
+            int k = random.nextInt(mas_check_for_bot.length);
+            int turn_i=mas_check_for_bot[k]/10;
+            int turn_j=mas_check_for_bot[k]%10;
+            openStatus[turn_i][turn_j]=true;
+            if (status[turn_i][turn_j]){
+                hit=true;
+                temp_turn_i=turn_i;
+                temp_turn_j=turn_j;
+                sum_hit++;
+                botTurn();
+            }
+        }
+
+    }
 
     protected boolean playerTurn() { return false;}
 
