@@ -144,26 +144,71 @@ public class CellsActivity extends Activity implements OnClickListener,
         return mas_check_for_bot;
     }
 
-    int choose_tap(){
+    void choose_tap(){
         int len=0;
         Random random = new Random();
-        if (temp_turn_i>1 && temp_turn_j>1)
-            len=4;
-        int k= random.nextInt(len);
-    }
-    protected void botTurn() {
-
-        int [] mas_check_for_bot=generate_mas_for_bot_turn();
-        if (hit){
-            if (sum_hit>1){
-
+        if (sum_hit>1){
+            int k=0;
+            if (temp_turn_i>1 && temp_turn_j>1){
+                k= random.nextInt(4);
             }
-            else{
-                if(temp_turn_i>1 && temp_turn_i>1){
-                    choose_tap();
+            else if (temp_turn_i==1 && temp_turn_j>1){
+                k=random.nextInt(3);
+            }
+            else if (temp_turn_i>1 && temp_turn_j==1){
+            }
+            if (k==0){
+                if (!openStatus[temp_turn_i-1][temp_turn_j]){
+                    openStatus[temp_turn_i-1][temp_turn_j]=true;
+                    if (status[temp_turn_i-1][temp_turn_j]){
+                        hit=true;
+                        sum_hit++;
+                        botTurn();
+                    }
+                }
+                else k=1;
+            }
+            if (k==1){
+                if (!openStatus[temp_turn_i][temp_turn_j+1]){
+                    openStatus[temp_turn_i][temp_turn_j+1]=true;
+                    if (status[temp_turn_i][temp_turn_j+1]){
+                        hit=true;
+                        sum_hit++;
+                        botTurn();
+                    }
+                }
+                else k=2;
+            }
+            if (k==2){
+                if (!openStatus[temp_turn_i][temp_turn_j-1]){
+                    openStatus[temp_turn_i][temp_turn_j-1]=true;
+                    if (status[temp_turn_i][temp_turn_j-1]){
+                        hit=true;
+                        sum_hit++;
+                        botTurn();
+                    }
+                }
+                else k=3;
+            }
+            if (k==3){
+                if (!openStatus[temp_turn_i+1][temp_turn_j]){
+                    openStatus[temp_turn_i+1][temp_turn_j]=true;
+                    if (status[temp_turn_i+1][temp_turn_j]){
+                        hit=true;
+                        sum_hit++;
+                        botTurn();
+                    }
                 }
             }
+        }
+
+
+    }
+    protected void botTurn() {
+        if (hit){
+            choose_tap();
         } else{
+            int [] mas_check_for_bot=generate_mas_for_bot_turn();
             Random random = new Random();
             int k = random.nextInt(mas_check_for_bot.length);
             int turn_i=mas_check_for_bot[k]/10;
