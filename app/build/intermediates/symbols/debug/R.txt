@@ -1,6 +1,6 @@
 int drawable ic_launcher 0x7f010000
 int id CellsLayout 0x7f020000
-int id HorizontalScrollView01 0x7f020001
+int id CellsLayoutEnemy 0x7f020001
 int layout cell 0x7f030000
 int layout cells 0x7f030001
 int string app_name 0x7f040000

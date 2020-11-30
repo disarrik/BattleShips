@@ -18,9 +18,21 @@ import task.Task;
 public class CellsActivity extends Activity implements OnClickListener,
         OnLongClickListener {
 
-    private int WIDTH = 10;
-    private int HEIGHT = 10;
+    private int WIDTH = 11;
+    private int HEIGHT = 11;
+    int countShips;
+    int countDestructedShips;
+    int countDestructedShipsEnemy;
 
+    private boolean enemyTurn;
+    private boolean SoloGameMode;
+    private boolean firstPlayerTurn;
+
+    private boolean[][] status;
+    private boolean[][] statusEnemy;
+    private boolean[][] openStatus;
+    private boolean[][] openStatusEnemy;
+    private Button[][] cellsEnemy;
     private Button[][] cells;
 
     @Override
@@ -69,24 +81,61 @@ public class CellsActivity extends Activity implements OnClickListener,
 
     }
 
-	/*
-     * NOT FOR THE BEGINNERS
-	 * ==================================================
-	 */
-
-    int getX(View v) {
+    protected int getX(View v) {
         return Integer.parseInt(((String) v.getTag()).split(",")[1]);
     }
 
-    int getY(View v) {
+    protected int getY(View v) {
         return Integer.parseInt(((String) v.getTag()).split(",")[0]);
     }
 
+    protected void placeShips(int length4, int length3, int length2, int length1) {
+        if (SoloGameMode) {
+            for (int i = 0; i < length4; i++) placeShip(4);
+            for (int i = 0; i < length3; i++) placeShip(3);
+            for (int i = 0; i < length2; i++) placeShip(2);
+            for (int i = 0; i < length1; i++) placeShip(1);
+        }
+        else {
+            for (int i = 0; i < length4; i++) placeShip(4, 1);
+            for (int i = 0; i < length3; i++) placeShip(3, 1);
+            for (int i = 0; i < length2; i++) placeShip(2, 1);
+            for (int i = 0; i < length1; i++) placeShip(1, 1);
+
+            for (int i = 0; i < length4; i++) placeShip(4, 2);
+            for (int i = 0; i < length3; i++) placeShip(3, 2);
+            for (int i = 0; i < length2; i++) placeShip(2, 2);
+            for (int i = 0; i < length1; i++) placeShip(1, 2);
+        }
+    }
+
+    protected void placeShip(int length) {}
+
+    protected void placeShip(int length, int player) {}
+
+    protected boolean checkWin() { return false;}
+
+    protected void botTurn() {}
+
+    protected boolean playerTurn() { return false;}
+
+    protected boolean playerTurn(int player) { return false;}//для мультиплеера
+
+    protected void changeGameMode() {}
+
+    protected void refresh() {}
+
+    protected void changePlayer() {}
+
     void makeCells() {
         cells = new Button[HEIGHT][WIDTH];
+        cellsEnemy = new Button[HEIGHT][WIDTH];
         GridLayout cellsLayout = (GridLayout) findViewById(R.id.CellsLayout);
+        GridLayout cellsLayoutEnemy = (GridLayout) findViewById(R.id.CellsLayoutEnemy);
         cellsLayout.removeAllViews();
+        cellsLayoutEnemy.removeAllViews();
         cellsLayout.setColumnCount(WIDTH);
+        cellsLayoutEnemy.setColumnCount(WIDTH);
         for (int i = 0; i < HEIGHT; i++)
             for (int j = 0; j < WIDTH; j++) {
                 LayoutInflater inflater = (LayoutInflater) getApplicationContext()
@@ -96,7 +145,14 @@ public class CellsActivity extends Activity implements OnClickListener,
                 cells[i][j].setOnLongClickListener(this);
                 cells[i][j].setTag(i + "," + j);
                 cellsLayout.addView(cells[i][j]);
+
+                LayoutInflater inflaterEnemy = (LayoutInflater) getApplicationContext()
+                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                cellsEnemy[i][j] = (Button) inflaterEnemy.inflate(R.layout.cell, cellsLayoutEnemy, false);
+                cellsEnemy[i][j].setOnClickListener(this);
+                cellsEnemy[i][j].setOnLongClickListener(this);
+                cellsEnemy[i][j].setTag(i + "," + j);
+                cellsLayoutEnemy.addView(cellsEnemy[i][j]);
             }
     }
-
 }
