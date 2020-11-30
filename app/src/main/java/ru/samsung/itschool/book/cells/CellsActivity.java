@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.GridLayout;
 
 
+import java.util.Random;
+
 import task.Stub;
 import task.Task;
 
@@ -34,6 +36,11 @@ public class CellsActivity extends Activity implements OnClickListener,
     private boolean[][] openStatusEnemy;
     private Button[][] cellsEnemy;
     private Button[][] cells;
+    // изменения от Железнова
+    // массив для всех чисел доски игрока, чтобы бот рандомно выбирал из оставшихся
+    // проверка на попадание ботом в пред. раз
+    private boolean[][] bot_turn;
+    private final boolean hit = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,7 +122,43 @@ public class CellsActivity extends Activity implements OnClickListener,
 
     protected boolean checkWin() { return false;}
 
-    protected void botTurn() {}
+    int [] generate_mas_for_bot_turn(){
+        int sum=0;
+        for (int i=0; i<HEIGHT; i++){
+            for (int j=0; j<WIDTH; j++){
+                if (!openStatus[i][j])
+                    sum++;
+            }
+        }
+        int [] mas_check_for_bot=new int [sum];
+        sum=0;
+        for (int i=0; i<HEIGHT; i++){
+            for (int j=0; j<WIDTH; j++){
+                if (!openStatus[i][j]){
+                    mas_check_for_bot[sum]=i*10+j;
+                    sum++;
+                }
+            }
+        }
+        return mas_check_for_bot;
+    }
+
+    protected void botTurn() {
+        int [] mas_check_for_bot=generate_mas_for_bot_turn();
+        for (int i=1; i<WIDTH; i++){
+            for (int j=1; j<HEIGHT; j++){
+                if (hit){
+
+                } else{
+                    Random random = new Random();
+                    int k = random.nextInt(mas_check_for_bot.length);
+                    int turn_i=mas_check_for_bot[k]/10;
+                    int turn_j=mas_check_for_bot[k]%10;
+                    
+                }
+            }
+        }
+    }
 
     protected boolean playerTurn() { return false;}
 
