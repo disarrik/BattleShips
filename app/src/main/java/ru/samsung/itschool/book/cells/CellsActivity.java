@@ -155,17 +155,6 @@ public class CellsActivity extends Activity{
     void check_win() {
         /*Проверяется выигрыш одного из игроков*/
     }
-
-    void choose_cell_for_shoot() {
-        /*Выбор ячейки для хода противника*/
-    }
-
-    void enemy_shot() {
-        /*Обработка выстрела противника по полю игрока
-        * Информация меняется
-        * При попадании не менять ход*/
-    }
-
     boolean is_exist(int x1, int y1) {
         // Проверяет ячейку на существование
         return (x1 >= 0 && x1 <= 9 && y1 >= 0 && y1 <= 9);
@@ -175,6 +164,137 @@ public class CellsActivity extends Activity{
         // Проверяет ячейку на нахождение рядом по вертикали или горизонтали
         return ((x1 == x2 && y1 != y2) || (x1 != x2 && y1 == y2));
     }
+    void choose_pretend(int i, int j){
+        if (is_exist(i,j) && !playerField[i][j].isFired && is_near(i,j, turn_i, turn_j)) {
+            mas_for_choose_tap[sum_pretend] = (i) * 10 + j;//добавление в массив индексов элемента
+            sum_pretend++;
+        }
+    }
+    void sort_mas_for_choose(){
+        for (int j=0; j<3; j++){
+            for (int i=0; i<3; i++){
+                if (mas_for_choose_tap[i]==0){
+                    int temp=mas_for_choose_tap[i+1];
+                    mas_for_choose_tap[i+1]=0;
+                    mas_for_choose_tap[i]=temp;
+                }
+            }
+        }
+    }
+
+    int [] mas_for_choose_tap=new int[4];
+    int pretend_turn_i=0;
+    int pretend_turn_j=0;
+    void delete_pretend(){
+        if (pretend_turn_i==turn_i){
+            for (int i=0; i<=4; i++){
+                if (mas_for_choose_tap[i]/10!=turn_i){
+                    mas_for_choose_tap[i]=0;
+                }
+            }
+        }
+        else{
+            for (int i=0; i<=4; i++){
+                if (mas_for_choose_tap[i]%10!=turn_j){
+                    mas_for_choose_tap[i]=0;
+                }
+            }
+        }
+        sort_mas_for_choose();
+        sum_pretend=0;
+        for (int i=0; i<4; i++){
+            if (mas_for_choose_tap[i]!=0){
+                sum_pretend++;
+            }
+        }
+    }
+    int sum_pretend=0;
+    void choose_cell_for_shoot() {
+        /*Выбор ячейки для хода противника*/
+        Random random = new Random();
+        if (sum_hit==1){
+            for (int i=turn_i-1; i<=turn_i+1; i++){
+                for (int j=turn_j-1; j<=turn_j+1; j++){
+                    choose_pretend(i,j);
+                }
+            }
+        }
+//        else{
+//            if (pretend_turn_i==turn_i){
+//                if (pretend_turn_j>turn_j){
+//                    if (pretend_turn_j<WIDTH-1)
+//                        mas_for_choose_tap[sum_pretend+1]=pretend_turn_i*10+pretend_turn_j+1;
+//                }
+//                else
+//                    if (pretend_turn_j>0)
+//                        mas_for_choose_tap[sum_pretend+1]=pretend_turn_i*10+pretend_turn_j-1;
+//
+//            }else{
+//                if (pretend_turn_i>turn_i){
+//                    if (pretend_turn_i<HEIGHT-1)
+//                        mas_for_choose_tap[sum_pretend+1]=(pretend_turn_i+1)*10+pretend_turn_j;
+//                }
+//                else
+//                if (pretend_turn_i>0)
+//                    mas_for_choose_tap[sum_pretend+1]=(pretend_turn_i-1)*10+pretend_turn_j-1;
+//            }
+//        }
+        int rand_choose=random.nextInt(sum_pretend);
+        playerField[mas_for_choose_tap[rand_choose]/10][mas_for_choose_tap[rand_choose]%10].isFired=true;
+        if (playerField[mas_for_choose_tap[rand_choose]/10][mas_for_choose_tap[rand_choose]%10].isShip){
+            sum_hit++;
+            pretend_turn_i=mas_for_choose_tap[rand_choose]/10;
+            pretend_turn_j=mas_for_choose_tap[rand_choose]%10;
+            if (sum_hit==2)
+                delete_pretend();
+            if (sum_hit==playerField[mas_for_choose_tap[rand_choose]/10][mas_for_choose_tap[rand_choose]%10].shipSize){
+                hit=false;
+                //todo анимация потопления корабля
+            }
+            enemy_shot();
+            //todo отрисовка анимации попадания
+        }
+    }
+    int sum_suitable_cell=0, turn_i, turn_j, sum_hit=0;
+    boolean hit=false;
+    int [] generate_mas_for_bot_turn(){ //создает массив из доступных для удара ячеек
+        int [] mas_check_for_bot=new int [100];
+        for (int i=0; i<HEIGHT; i++){
+            for (int j=0; j<WIDTH; j++){
+                if (playerField[i][j].isFired){
+                    mas_check_for_bot[sum_suitable_cell]=i*10+j;
+                    sum_suitable_cell++;
+                }
+            }
+        }
+        return mas_check_for_bot;
+    }
+    
+    void enemy_shot() {
+        /*Обработка выстрела противника по полю игрока
+        * Информация меняется
+        * При попадании не менять ход*/
+        //todo задержка?
+        if (hit) {
+            choose_cell_for_shoot();
+        }else{
+            int [] mas_check_for_bot=generate_mas_for_bot_turn();
+            Random random = new Random();
+            int k = random.nextInt(sum_suitable_cell);
+            int temp_turn_i=mas_check_for_bot[k]/10;
+            int temp_turn_j=mas_check_for_bot[k]%10;
+            playerField[temp_turn_i][temp_turn_j].isFired=true;
+            if (playerField[temp_turn_i][temp_turn_j].isShip){
+                hit=true;
+                turn_i=temp_turn_i;
+                turn_j=temp_turn_j;
+                sum_hit++;
+                enemy_shot();
+            }
+        }
+    }
+
+
 
     protected int getX(View v) {
         return Integer.parseInt(((String) v.getTag()).split(",")[1]) ;
