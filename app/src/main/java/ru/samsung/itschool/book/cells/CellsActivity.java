@@ -12,8 +12,6 @@ import android.widget.Button;
 import android.widget.GridLayout;
 
 
-import java.io.FileReader;
-
 import task.Stub;
 import task.Task;
 
@@ -22,18 +20,13 @@ public class CellsActivity extends Activity implements OnClickListener,
 
     private int WIDTH = 11;
     private int HEIGHT = 11;
-    private int countShips;
-    private int countDestructedShips;
-    private int countDestructedShipsEnemy;
-    private int length1;
-    private int length2;
-    private int length3;
-    private int length4;
+    int countShips;
+    int countDestructedShips;
+    int countDestructedShipsEnemy;
 
     private boolean enemyTurn;
     private boolean SoloGameMode;
     private boolean firstPlayerTurn;
-    private boolean start;
 
     private boolean[][] status;
     private boolean[][] statusEnemy;
@@ -47,22 +40,23 @@ public class CellsActivity extends Activity implements OnClickListener,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cells);
         makeCells();
+
         generate();
+
     }
 
     void generate() {
-        length1 = 3;
-        length2 = 3;
-        length3 = 2;
-        length4 = 1;
-        countShips = 4*length4 + 3*length3 + 2*length2 + length1; //1 - 4x палубная, 2 - 3х палубная, 3 - 2х палубные, 3 - 1 палубная
-        countDestructedShips = 0;
-        countDestructedShipsEnemy = 0;
-        enemyTurn = false;
-        SoloGameMode = true;
-        firstPlayerTurn = true;
-        start = true;
-        placeShips(length4, length2, length3, length3);
+
+        //Эту строку нужно удалить
+        Task.showMessage(this, "Добавьте код в функцию активности generate() для генерации клеточного поля");
+
+
+        for (int i = 0; i < HEIGHT; i++)
+            for (int j = 0; j < WIDTH; j++) {
+                //ADD YOUR CODE HERE
+                //....
+
+            }
     }
 
     @Override
@@ -147,31 +141,16 @@ public class CellsActivity extends Activity implements OnClickListener,
                 LayoutInflater inflater = (LayoutInflater) getApplicationContext()
                         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 cells[i][j] = (Button) inflater.inflate(R.layout.cell, cellsLayout, false);
-                if(i != 0 && j != 0) {
-                    cells[i][j].setOnClickListener(this);
-                }
-                else if (j == 0 && i != 0){
-                    cells[i][j].setText(Integer.toString(i));
-                }
-                else if (i == 0 && j != 0) {
-                    cells[i][j].setText(Integer.toString(j));
-                }
+                cells[i][j].setOnClickListener(this);
+                cells[i][j].setOnLongClickListener(this);
                 cells[i][j].setTag(i + "," + j);
                 cellsLayout.addView(cells[i][j]);
-
 
                 LayoutInflater inflaterEnemy = (LayoutInflater) getApplicationContext()
                         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 cellsEnemy[i][j] = (Button) inflaterEnemy.inflate(R.layout.cell, cellsLayoutEnemy, false);
-                if (!SoloGameMode && i != 0 && j != 0) {
-                    cellsEnemy[i][j].setOnClickListener(this);
-                }
-                else if (j == 0 && i != 0){
-                    cellsEnemy[i][j].setText(Integer.toString(i));
-                }
-                else if (i == 0 && j != 0) {
-                    cellsEnemy[i][j].setText(Integer.toString(j));
-                }
+                cellsEnemy[i][j].setOnClickListener(this);
+                cellsEnemy[i][j].setOnLongClickListener(this);
                 cellsEnemy[i][j].setTag(i + "," + j);
                 cellsLayoutEnemy.addView(cellsEnemy[i][j]);
             }
