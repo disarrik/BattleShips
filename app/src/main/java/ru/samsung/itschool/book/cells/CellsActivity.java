@@ -2,6 +2,7 @@ package ru.samsung.itschool.book.cells;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import android.os.CountDownTimer;
@@ -29,6 +30,7 @@ public class CellsActivity extends Activity{
     private Button[] indexVertical = new Button[11];
     private Button[] indexHorizontalEnemy = new Button[11];
     private Button[] indexVerticalEnemy = new Button[11];
+    private Button[][] menu;
 
     // todo: Создать кнопку для поворота кораблей при расстановке
     // TODO: 01.12.2020 Интерфейс говно - надо доработатть
@@ -183,6 +185,46 @@ public class CellsActivity extends Activity{
     }
 
     void makeCells() {
+        LayoutInflater inflater = (LayoutInflater) getApplicationContext()
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        menu = new Button[4][4];
+        GridLayout cellsMenu = (GridLayout) findViewById(R.id.MenuLayout);
+        cellsMenu.removeAllViews();
+        cellsMenu.setColumnCount(4);
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                menu[i][j] = (Button) inflater.inflate(R.layout.cell, cellsMenu, false);
+                if (i == 0 && j == 3) {
+                    menu[i][j].setText("R");
+                    OnClickListener clickListenerForReverse = new OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if (phase == "build") {
+                                direction = (direction == "hor" ? "ver" : "hor");
+                                //вставить функцию изменения
+                            }
+                            else {
+                                Stub.show(context,"Сейчас не фаза подготовки");
+                            }
+                        }
+                    };
+                    menu[i][j].setOnClickListener(clickListenerForReverse);
+                }
+                else if (direction == "hor") {
+                    if (j == 0) {
+                        menu[i][j].setBackgroundColor(Color.RED);
+                    }
+                }
+                else if (direction == "ver") {
+                    if (i == 3) {
+                        menu[i][j].setBackgroundColor(Color.RED);
+                    }
+                }
+                menu[i][j].setTag(i + "," + j);
+                cellsMenu.addView(menu[i][j]);
+            }
+        }
+
         cells = new Button[HEIGHT][WIDTH];
         cellsEnemy = new Button[HEIGHT][WIDTH];
         GridLayout cellsLayout = (GridLayout) findViewById(R.id.CellsLayout);
@@ -193,8 +235,6 @@ public class CellsActivity extends Activity{
         cellsLayoutEnemy.setColumnCount(WIDTH+1);
         for (int i = -1; i < HEIGHT; i++)
             for (int j = -1; j < WIDTH; j++) {
-                LayoutInflater inflater = (LayoutInflater) getApplicationContext()
-                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 if (i == -1) {
                     indexHorizontal[j + 1] = (Button) inflater.inflate(R.layout.cell, cellsLayout, false);
                     indexHorizontal[j+1].setText(Integer.toString(j+1));
