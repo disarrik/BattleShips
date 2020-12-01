@@ -22,7 +22,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b43fda77-facd-4887-9b37-0274d020dfae" name="Default Changelist" comment="30.11.2020 Балуемся гитом" />
+    <list default="true" id="b43fda77-facd-4887-9b37-0274d020dfae" name="Default Changelist" comment="01.12.2020" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -136,6 +136,11 @@
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
+        <entry key="1">
+          <value>
+            <State />
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State />
@@ -143,10 +148,12 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="30.11.2020 Балуемся гитом" />
-    <option name="LAST_COMMIT_MESSAGE" value="30.11.2020 Балуемся гитом" />
+    <MESSAGE value="01.12.2020" />
+    <option name="LAST_COMMIT_MESSAGE" value="01.12.2020" />
   </component>
   <component name="WindowStateProjectService">
     <state x="654" y="275" key="#Notifications" timestamp="1606754617744">
