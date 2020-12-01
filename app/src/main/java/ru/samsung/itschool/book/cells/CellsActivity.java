@@ -15,16 +15,15 @@ import android.widget.GridLayout;
 import task.Stub;
 import task.Task;
 
-public class CellsActivity extends Activity implements OnClickListener,
-        OnLongClickListener {
-
-    private int WIDTH = 11;
-    private int HEIGHT = 11;
+public class CellsActivity extends Activity{
+    private final Context context = this;
+    private int WIDTH = 10;
+    private int HEIGHT = 10;
     int countShips;
     int countDestructedShips;
     int countDestructedShipsEnemy;
 
-    private boolean enemyTurn;
+    private String phase; // build, yourTurn, botTurn
     private boolean SoloGameMode;
     private boolean firstPlayerTurn;
 
@@ -34,6 +33,10 @@ public class CellsActivity extends Activity implements OnClickListener,
     private boolean[][] openStatusEnemy;
     private Button[][] cellsEnemy;
     private Button[][] cells;
+    private Button[] indexHorizontal = new Button[11];
+    private Button[] indexVertical = new Button[11];
+    private Button[] indexHorizontalEnemy = new Button[11];
+    private Button[] indexVerticalEnemy = new Button[11];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,72 +49,17 @@ public class CellsActivity extends Activity implements OnClickListener,
     }
 
     void generate() {
-
-        //Эту строку нужно удалить
-        Task.showMessage(this, "Добавьте код в функцию активности generate() для генерации клеточного поля");
-
-
-        for (int i = 0; i < HEIGHT; i++)
-            for (int j = 0; j < WIDTH; j++) {
-                //ADD YOUR CODE HERE
-                //....
-
-            }
+        phase = "build";
     }
 
-    @Override
-    public boolean onLongClick(View v) {
-        //Эту строку нужно удалить
-        Stub.show(this, "Добавьте код в функцию активности onLongClick() - реакцию на долгое нажатие на клетку");
-        return false;
-    }
-
-    @Override
-    public void onClick(View v) {
-        //Эту строку нужно удалить
-        Stub.show(this, "Добавьте код в функцию активности onClick() - реакцию на нажатие на клетку");
-
-        Button tappedCell = (Button) v;
-
-        //Получаем координтаты нажатой клетки
-        int tappedX = getX(tappedCell);
-        int tappedY = getY(tappedCell);
-        //ADD YOUR CODE HERE
-        //....
-
-    }
 
     protected int getX(View v) {
-        return Integer.parseInt(((String) v.getTag()).split(",")[1]);
+        return Integer.parseInt(((String) v.getTag()).split(",")[1]) - 1; //-1 потому, что в таблице первая строка и столбец под координаты
     }
 
     protected int getY(View v) {
-        return Integer.parseInt(((String) v.getTag()).split(",")[0]);
+        return Integer.parseInt(((String) v.getTag()).split(",")[0]) - 1; //-1 потому, что в таблице первая строка и столбец под координаты
     }
-
-    protected void placeShips(int length4, int length3, int length2, int length1) {
-        if (SoloGameMode) {
-            for (int i = 0; i < length4; i++) placeShip(4);
-            for (int i = 0; i < length3; i++) placeShip(3);
-            for (int i = 0; i < length2; i++) placeShip(2);
-            for (int i = 0; i < length1; i++) placeShip(1);
-        }
-        else {
-            for (int i = 0; i < length4; i++) placeShip(4, 1);
-            for (int i = 0; i < length3; i++) placeShip(3, 1);
-            for (int i = 0; i < length2; i++) placeShip(2, 1);
-            for (int i = 0; i < length1; i++) placeShip(1, 1);
-
-            for (int i = 0; i < length4; i++) placeShip(4, 2);
-            for (int i = 0; i < length3; i++) placeShip(3, 2);
-            for (int i = 0; i < length2; i++) placeShip(2, 2);
-            for (int i = 0; i < length1; i++) placeShip(1, 2);
-        }
-    }
-
-    protected void placeShip(int length) {}
-
-    protected void placeShip(int length, int player) {}
 
     protected boolean checkWin() { return false;}
 
@@ -134,23 +82,68 @@ public class CellsActivity extends Activity implements OnClickListener,
         GridLayout cellsLayoutEnemy = (GridLayout) findViewById(R.id.CellsLayoutEnemy);
         cellsLayout.removeAllViews();
         cellsLayoutEnemy.removeAllViews();
-        cellsLayout.setColumnCount(WIDTH);
-        cellsLayoutEnemy.setColumnCount(WIDTH);
-        for (int i = 0; i < HEIGHT; i++)
-            for (int j = 0; j < WIDTH; j++) {
+        cellsLayout.setColumnCount(WIDTH+1);
+        cellsLayoutEnemy.setColumnCount(WIDTH+1);
+        for (int i = -1; i < HEIGHT; i++)
+            for (int j = -1; j < WIDTH; j++) {
                 LayoutInflater inflater = (LayoutInflater) getApplicationContext()
                         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                if (i == -1) {
+                    indexHorizontal[j + 1] = (Button) inflater.inflate(R.layout.cell, cellsLayout, false);
+                    indexHorizontal[j+1].setText(Integer.toString(j+1));
+                    indexHorizontal[j+1].setTag(i + "," + j);
+                    cellsLayout.addView(indexHorizontal[j + 1]);
+                    indexHorizontalEnemy[j + 1] = (Button) inflater.inflate(R.layout.cell, cellsLayout, false);
+                    indexHorizontalEnemy[j+1].setText(Integer.toString(j+1));
+                    indexHorizontalEnemy[j+1].setTag(i + "," + j);
+                    cellsLayoutEnemy.addView(indexHorizontalEnemy[j + 1]);
+                    continue;
+                }
+                if (j == -1 && i > -1) {
+                    indexVertical[i + 1] = (Button) inflater.inflate(R.layout.cell, cellsLayout, false);
+                    indexVertical[i+1].setText(Integer.toString(i+1));
+                    indexVertical[i+1].setTag(i + "," + j);
+                    cellsLayout.addView(indexVertical[i + 1]);
+                    indexVerticalEnemy[i + 1] = (Button) inflater.inflate(R.layout.cell, cellsLayout, false);
+                    indexVerticalEnemy[i+1].setText(Integer.toString(i+1));
+                    indexVerticalEnemy[i+1].setTag(i + "," + j);
+                    cellsLayoutEnemy.addView(indexVerticalEnemy[i + 1]);
+                    continue;
+                }
                 cells[i][j] = (Button) inflater.inflate(R.layout.cell, cellsLayout, false);
-                cells[i][j].setOnClickListener(this);
-                cells[i][j].setOnLongClickListener(this);
+                //------обрабочик нажатий во время рассновки корбалей
+                OnClickListener clickListenerForPlacing = new OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (phase == "build") {
+                            Stub.show(context,"inside onClick()");
+                        }
+                        else {
+                            Stub.show(context,"Сейчас не фаза подготовки");
+                        }
+                    }
+                };
+                //---------------------------------------------------
+                cells[i][j].setOnClickListener(clickListenerForPlacing);
                 cells[i][j].setTag(i + "," + j);
                 cellsLayout.addView(cells[i][j]);
-
                 LayoutInflater inflaterEnemy = (LayoutInflater) getApplicationContext()
                         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                //------обрабочик нажатий во время хода игрока
+                OnClickListener clickListenerForYourTurn = new OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (phase == "yourTurn") {
+                            Stub.show(context,"inside onClick()");
+                        }
+                        else {
+                            Stub.show(context,"сейчас не ваш ход");
+                        }
+                    }
+                };
+                //---------------------------------------------------
                 cellsEnemy[i][j] = (Button) inflaterEnemy.inflate(R.layout.cell, cellsLayoutEnemy, false);
-                cellsEnemy[i][j].setOnClickListener(this);
-                cellsEnemy[i][j].setOnLongClickListener(this);
+                cellsEnemy[i][j].setOnClickListener(clickListenerForYourTurn);
                 cellsEnemy[i][j].setTag(i + "," + j);
                 cellsLayoutEnemy.addView(cellsEnemy[i][j]);
             }
