@@ -21,6 +21,7 @@ public class CellsActivity extends Activity{
     private final Context context = this;
     private int WIDTH = 10;
     private int HEIGHT = 10;
+    private int countShipPlace = 9; // 1 - 4x, 2 - 3x, 3 - 2x, 3 - 1x
     private String phase; // build, yourTurn, botTurn
     private String direction = "hor";
 
@@ -138,6 +139,32 @@ public class CellsActivity extends Activity{
 
     void redraw_ship() {
         /*При повороте корабля он пропадает в поле и перерисовывается в интерфейсе*/
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                menu[i][j].setBackgroundColor(Color.WHITE);
+                if (countShipPlace < 9) {
+                    if ((i == 0 && j == 0) || (i == 3 && j == 3)) continue;
+                }
+                if (countShipPlace < 7) {
+                    if ((i == 1 && j == 0) || (i == 3 && j == 2)) continue;
+                }
+                if (countShipPlace < 4) {
+                    if ((i == 2 && j == 0) || (i == 3 && j == 1)) continue;
+                }
+                if (countShipPlace < 1) {
+                    break;
+                }
+                if (direction == "hor") {
+                    if (j == 0) {
+                        menu[i][j].setBackgroundColor(Color.RED);
+                    }
+                } else if (direction == "ver") {
+                    if (i == 3) {
+                        menu[i][j].setBackgroundColor(Color.RED);
+                    }
+                }
+            }
+        }
     }
 
     boolean check_end_of_build() {
@@ -194,7 +221,7 @@ public class CellsActivity extends Activity{
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 menu[i][j] = (Button) inflater.inflate(R.layout.cell, cellsMenu, false);
-                if (i == 0 && j == 3) {
+                if (i != 3 && j != 0) {
                     menu[i][j].setText("R");
                     OnClickListener clickListenerForReverse = new OnClickListener() {
                         @Override
@@ -206,24 +233,16 @@ public class CellsActivity extends Activity{
                             else {
                                 Stub.show(context,"Сейчас не фаза подготовки");
                             }
+                            redraw_ship();
                         }
                     };
                     menu[i][j].setOnClickListener(clickListenerForReverse);
-                }
-                else if (direction == "hor") {
-                    if (j == 0) {
-                        menu[i][j].setBackgroundColor(Color.RED);
-                    }
-                }
-                else if (direction == "ver") {
-                    if (i == 3) {
-                        menu[i][j].setBackgroundColor(Color.RED);
-                    }
                 }
                 menu[i][j].setTag(i + "," + j);
                 cellsMenu.addView(menu[i][j]);
             }
         }
+        redraw_ship();
 
         cells = new Button[HEIGHT][WIDTH];
         cellsEnemy = new Button[HEIGHT][WIDTH];
@@ -268,7 +287,7 @@ public class CellsActivity extends Activity{
                         else {
                             Stub.show(context,"Сейчас не фаза подготовки");
                         }
-                        // todo: Вызвать перерисовку show_field
+                        show_field();
                     }
                 };
                 //---------------------------------------------------
@@ -289,7 +308,7 @@ public class CellsActivity extends Activity{
                             // ?
                             Stub.show(context,"сейчас не ваш ход");
                         }
-                        // todo: Вызвать перерисовку show_field
+                        show_field();
                     }
                 };
                 // TODO: 01.12.2020 добавить обработчики для кнопки поворота, и для кнопки постановки

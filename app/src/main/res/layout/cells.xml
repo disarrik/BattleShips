@@ -42,7 +42,7 @@
             >
             <GridLayout
                 android:id="@+id/MenuLayout"
-                android:background="#1852E6"
+                android:background="#FFFFFF"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp">

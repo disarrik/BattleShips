@@ -36,11 +36,9 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6e70751e-603d-4a81-9c91-3186043e8ea6" name="Default Changelist" comment="Закончил rebuild">
+    <list default="true" id="6e70751e-603d-4a81-9c91-3186043e8ea6" name="Default Changelist" comment="Сделал корабль и кнопку для поворота">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/symbols/debug/R.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/ru/samsung/itschool/book/cells/CellsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/ru/samsung/itschool/book/cells/CellsActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/cell.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/cell.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/cells.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/cells.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -236,7 +234,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606843102598</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Сделал корабль и кнопку для поворота">
+      <created>1606859606255</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1606859606256</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -282,7 +287,8 @@
     <MESSAGE value="Назначил разные функции обработки кнопкам игрока и бота" />
     <MESSAGE value="слил rebuild" />
     <MESSAGE value="Закончил rebuild" />
-    <option name="LAST_COMMIT_MESSAGE" value="Закончил rebuild" />
+    <MESSAGE value="Сделал корабль и кнопку для поворота" />
+    <option name="LAST_COMMIT_MESSAGE" value="Сделал корабль и кнопку для поворота" />
   </component>
   <component name="WindowStateProjectService">
     <state x="654" y="275" width="482" height="456" key="#Notifications" timestamp="1606757735712">
@@ -293,6 +299,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="93" y="93" width="1350" height="638" key="AVDManager/0.0.1536.824@0.0.1536.824" timestamp="1606831625589" />
+    <state x="565" y="159" key="AndroidProcessChooserDialog" timestamp="1606864485793">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="565" y="159" key="AndroidProcessChooserDialog/0.0.1536.824@0.0.1536.824" timestamp="1606864485793" />
     <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1606855094693">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -309,30 +319,46 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="857" y="250" key="Github.ShareDialog/0.0.1536.824@0.0.1536.824" timestamp="1606743959947" />
-    <state width="1491" height="121" key="GridCell.Tab.0.bottom" timestamp="1606859214962">
+    <state width="1491" height="210" key="GridCell.Tab.0.bottom" timestamp="1606865275519">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1491" height="121" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1606859214962" />
-    <state width="1491" height="121" key="GridCell.Tab.0.center" timestamp="1606859214961">
+    <state width="1491" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1606865275519" />
+    <state width="1491" height="210" key="GridCell.Tab.0.center" timestamp="1606865275519">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1491" height="121" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1606859214961" />
-    <state width="1491" height="121" key="GridCell.Tab.0.left" timestamp="1606859214961">
+    <state width="1491" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1606865275519" />
+    <state width="1491" height="210" key="GridCell.Tab.0.left" timestamp="1606865275518">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1491" height="121" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1606859214961" />
-    <state width="1491" height="121" key="GridCell.Tab.0.right" timestamp="1606859214961">
+    <state width="1491" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1606865275518" />
+    <state width="1491" height="210" key="GridCell.Tab.0.right" timestamp="1606865275519">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1491" height="121" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1606859214961" />
+    <state width="1491" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1606865275519" />
+    <state width="1491" height="210" key="GridCell.Tab.1.bottom" timestamp="1606865275519">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1491" height="210" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1606865275519" />
+    <state width="1491" height="210" key="GridCell.Tab.1.center" timestamp="1606865275519">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1491" height="210" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1606865275519" />
+    <state width="1491" height="210" key="GridCell.Tab.1.left" timestamp="1606865275519">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1491" height="210" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1606865275519" />
+    <state width="1491" height="210" key="GridCell.Tab.1.right" timestamp="1606865275519">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1491" height="210" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1606865275519" />
     <state x="341" y="92" key="SettingsEditor" timestamp="1606849779620">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="341" y="92" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1606849779620" />
-    <state x="424" y="137" key="Vcs.Push.Dialog.v2" timestamp="1606855606328">
+    <state x="424" y="137" key="Vcs.Push.Dialog.v2" timestamp="1606859634691">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="424" y="137" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1606855606328" />
+    <state x="424" y="137" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1606859634691" />
     <state x="578" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606842477847">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
