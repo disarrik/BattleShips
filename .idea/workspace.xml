@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Firebase" />
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="NONE" />
   </component>
@@ -22,7 +30,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b43fda77-facd-4887-9b37-0274d020dfae" name="Default Changelist" comment="30.11.2020 Балуемся гитом" />
+    <list default="true" id="6e70751e-603d-4a81-9c91-3186043e8ea6" name="Default Changelist" comment="01.12.2020">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/ru/samsung/itschool/book/cells/CellsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/ru/samsung/itschool/book/cells/CellsActivity.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,14 +46,29 @@
     </projectState>
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--follow-tags" />
+        <option name="title" value="Current Branch" />
+      </GitPushTagMode>
+    </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="gamba" />
+        <entry key="$PROJECT_DIR$" value="BotSpawn" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="MIXED" />
   </component>
-  <component name="ProjectId" id="1l18roTdYeVle9Cro4WjG0IbiDI" />
+  <component name="GithubPullRequestsUISettings">
+    <option name="hiddenUrls">
+      <set>
+        <option value="https://github.com/disarrik/BattleShips.git" />
+        <option value="https://github.com/vv73/Cells.git" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectId" id="1l0paFpURPlJUnz3Y3OT5SGKime" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -50,6 +76,9 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Cells" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
@@ -59,7 +88,7 @@
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App">
+    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
       <module name="BattleShips.app" />
       <option name="DEPLOY" value="true" />
       <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
@@ -122,35 +151,113 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="b43fda77-facd-4887-9b37-0274d020dfae" name="Default Changelist" comment="" />
-      <created>1606753437464</created>
+      <changelist id="6e70751e-603d-4a81-9c91-3186043e8ea6" name="Default Changelist" comment="" />
+      <created>1606743924844</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1606753437464</updated>
+      <updated>1606743924844</updated>
     </task>
-    <task id="LOCAL-00001" summary="30.11.2020 Балуемся гитом">
-      <created>1606758749949</created>
+    <task id="LOCAL-00001" summary="init">
+      <created>1606752169192</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1606758749950</updated>
+      <updated>1606752169192</updated>
     </task>
-    <task id="LOCAL-00002" summary="30.11.2020 Балуемся гитом">
-      <created>1606759094293</created>
+    <task id="LOCAL-00002" summary="init generate">
+      <created>1606754804524</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1606759094295</updated>
+      <updated>1606754804524</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="поменял generate">
+      <created>1606756167093</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1606756167093</updated>
+    </task>
+    <task id="LOCAL-00004" summary="поменял generate">
+      <created>1606758161069</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1606758161069</updated>
+    </task>
+    <task id="LOCAL-00005" summary="все сломал)">
+      <created>1606769298082</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1606769298082</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Сделал статовую генерацию поля, теперь cells аботает правильно (в нем стольок элементов, сколько активных клеток), убрал метод onClick, теперь клик обрабатывается callback функцией.">
+      <created>1606836212213</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1606836212213</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Назначил разные функции обработки кнопкам игрока и бота">
+      <created>1606839756047</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1606839756047</updated>
+    </task>
+    <task id="LOCAL-00008" summary="слил rebuild">
+      <created>1606842556889</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1606842556889</updated>
+    </task>
+    <task id="LOCAL-00009" summary="слил rebuild">
+      <created>1606842792033</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1606842792033</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Закончил rebuild">
+      <created>1606843102598</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1606843102598</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
-        <entry key="MAIN">
+        <entry key="1">
           <value>
             <State />
+          </value>
+        </entry>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -158,29 +265,72 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="30.11.2020 Балуемся гитом" />
-    <option name="LAST_COMMIT_MESSAGE" value="30.11.2020 Балуемся гитом" />
+    <MESSAGE value="init" />
+    <MESSAGE value="init generate" />
+    <MESSAGE value="поменял generate" />
+    <MESSAGE value="все сломал)" />
+    <MESSAGE value="Сделал статовую генерацию поля, теперь cells аботает правильно (в нем стольок элементов, сколько активных клеток), убрал метод onClick, теперь клик обрабатывается callback функцией." />
+    <MESSAGE value="Назначил разные функции обработки кнопкам игрока и бота" />
+    <MESSAGE value="слил rebuild" />
+    <MESSAGE value="Закончил rebuild" />
+    <option name="LAST_COMMIT_MESSAGE" value="Закончил rebuild" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="654" y="275" key="#Notifications" timestamp="1606754617744">
+    <state x="654" y="275" width="482" height="456" key="#Notifications" timestamp="1606757735712">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="654" y="275" key="#Notifications/0.0.1536.824@0.0.1536.824" timestamp="1606754617744" />
-    <state x="147" y="65" key="MergeDialog" timestamp="1606759186509">
+    <state x="654" y="275" width="482" height="456" key="#Notifications/0.0.1536.824@0.0.1536.824" timestamp="1606757735712" />
+    <state x="93" y="93" width="1350" height="638" key="AVDManager" timestamp="1606831625589">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="147" y="65" key="MergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1606759186509" />
-    <state x="407" y="174" key="MultipleFileMergeDialog" timestamp="1606759211977">
+    <state x="93" y="93" width="1350" height="638" key="AVDManager/0.0.1536.824@0.0.1536.824" timestamp="1606831625589" />
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1606846627655">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="407" y="174" key="MultipleFileMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1606759211977" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1606839898016">
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1606846627655" />
+    <state x="645" y="298" key="Github.Dialog.Accounts.Choose" timestamp="1606757211522">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1606839898016" />
-    <state x="506" y="201" key="git4idea.merge.GitPullDialog" timestamp="1606839790380">
+    <state x="645" y="298" key="Github.Dialog.Accounts.Choose/0.0.1536.824@0.0.1536.824" timestamp="1606757211522" />
+    <state x="857" y="250" key="Github.ShareDialog" timestamp="1606743959947">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="506" y="201" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1606839790380" />
+    <state x="857" y="250" key="Github.ShareDialog/0.0.1536.824@0.0.1536.824" timestamp="1606743959947" />
+    <state width="1491" height="192" key="GridCell.Tab.0.bottom" timestamp="1606839701285">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1491" height="192" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1606839701285" />
+    <state width="1491" height="192" key="GridCell.Tab.0.center" timestamp="1606839701284">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1491" height="192" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1606839701284" />
+    <state width="1491" height="192" key="GridCell.Tab.0.left" timestamp="1606839701284">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1491" height="192" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1606839701284" />
+    <state width="1491" height="192" key="GridCell.Tab.0.right" timestamp="1606839701285">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1491" height="192" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1606839701285" />
+    <state x="341" y="92" key="SettingsEditor" timestamp="1606849779620">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="341" y="92" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1606849779620" />
+    <state x="424" y="137" key="Vcs.Push.Dialog.v2" timestamp="1606844265511">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="424" y="137" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1606844265511" />
+    <state x="578" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606842477847">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="578" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1606842477847" />
+    <state x="516" y="125" key="git4idea.branch.GitSmartOperationDialog" timestamp="1606843562820">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="516" y="125" key="git4idea.branch.GitSmartOperationDialog/0.0.1536.824@0.0.1536.824" timestamp="1606843562820" />
+    <state x="532" y="201" key="git4idea.merge.GitMergeDialog" timestamp="1606842942452">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="532" y="201" key="git4idea.merge.GitMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1606842942452" />
   </component>
 </project>
