@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,33 +18,42 @@ import java.util.Random;
 import task.Stub;
 import task.Task;
 
-public class CellsActivity extends Activity implements OnClickListener,
-        OnLongClickListener {
+public class CellsActivity extends Activity{
+    private final Context context = this;
+    private int WIDTH = 10;
+    private int HEIGHT = 10;
+    private String phase; // build, yourTurn, botTurn
+    private String direction = "hor";
 
-    private int WIDTH = 11;
-    private int HEIGHT = 11;
-    int countShips;
-    int countDestructedShips;
-    int countDestructedShipsEnemy;
-
-    private boolean enemyTurn;
-    private boolean SoloGameMode;
-    private boolean firstPlayerTurn;
-
-    private boolean[][] status;
-    private boolean[][] statusEnemy;
-    private boolean[][] openStatus;
-    private boolean[][] openStatusEnemy;
     private Button[][] cellsEnemy;
     private Button[][] cells;
-    // изменения от Железнова
-    // массив для всех чисел доски игрока, чтобы бот рандомно выбирал из оставшихся
-    // проверка на попадание ботом в пред. раз
-    private int sum_hit=0;
-    private boolean[][] bot_turn;
-    private boolean hit = false;
-    private int temp_turn_i;
-    private int temp_turn_j;
+    private Button[] indexHorizontal = new Button[11];
+    private Button[] indexVertical = new Button[11];
+    private Button[] indexHorizontalEnemy = new Button[11];
+    private Button[] indexVerticalEnemy = new Button[11];
+
+    // todo: Создать кнопку для поворота кораблей при расстановке
+    // TODO: 01.12.2020 Интерфейс говно - надо доработатть
+    // todo: Дописать методы класса
+    protected class GameCell {
+        public int row; // строчка
+        public int col; // колонка
+        public boolean opened; // открыта ли ячейка
+        public boolean isFired; // стреляли
+        public boolean isShip; // стоит ли корабль
+        public boolean isNear; // стоит ли корабль рядом
+        public boolean isClickable; // можно ли нажать
+        public int shipSize; // размер корабля
+        public int textureNumber; // todo: текстуры?
+
+        void GameCell(int row, int col) {
+            this.row = row;
+            this.col = col;
+        }
+    }
+
+    private GameCell[][] playerField = new GameCell[HEIGHT][WIDTH]; // поле игрока
+    private GameCell[][] enemyField = new GameCell[HEIGHT][WIDTH]; // поле противника
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,186 +64,125 @@ public class CellsActivity extends Activity implements OnClickListener,
     }
 
     void generate() {
-
-        //Эту строку нужно удалить
-        Task.showMessage(this, "Добавьте код в функцию активности generate() для генерации клеточного поля");
-
-
-        for (int i = 0; i < HEIGHT; i++)
-            for (int j = 0; j < WIDTH; j++) {
-                //ADD YOUR CODE HERE
-                //....
-
-            }
+        phase = "build";
     }
 
-    @Override
-    public boolean onLongClick(View v) {
-        //Эту строку нужно удалить
-        Stub.show(this, "Добавьте код в функцию активности onLongClick() - реакцию на долгое нажатие на клетку");
-        return false;
+    /*
+    onCreate() -> makeCells()
+    onCreate() -> generate()
+    generate() -> create_enemy_field()
+    create_enemy_field() -> get_free_cells()
+    create_enemy_field() -> can_place()
+    create_enemy_field() -> create_ship()
+    generate() -> close_cells_for_building()
+
+    phase: build
+    click on_player_field -> create_ship()
+    create_ship -> close_cells_for_building()
+    click on_rotate(button) -> redraw_ship()
+    click on_rotate(button) -> close_cells_for_building()
+    create_ship() ->  check_end_of_build()
+    click on_rotate(button) -> redraw_field()
+    create_ship() -> redraw()
+
+    phase: player
+    click on_enemy_field -> player_shot() (при условии правильности)
+    click on_enemy_field -> redraw_field()
+    player_shot -> check_win()
+    player_shot() -> choose_cells_for_shoot() (при условии промаха)
+    player_shot() -> phase="enemy"
+
+    phase: enemy
+    choose_cell_for_shoot() -> enemy_shot()
+    enemy_shot() -> redraw_field()
+    enemy_shot() -> check_win()
+    enemy_shot() -> phase="player" (при условии промаха)
+    * */
+
+    void show_field() {
+        /*Функция идёт по массиву данных и отрисовывает их на кнопках*/
+        /* Нарисовать открытые поля с текстурой(?) выделить подбитые, потопленные
+        * Как выделять - придумать*/
     }
 
-    @Override
-    public void onClick(View v) {
-        //Эту строку нужно удалить
-        Stub.show(this, "Добавьте код в функцию активности onClick() - реакцию на нажатие на клетку");
+    void create_enemy_field() {
+        /*Создает поле противника*/
+    }
 
-        Button tappedCell = (Button) v;
+    void create_ship(GameCell[][] field, int row, int col, int size) {
+        /* Функция создаёт корабль в нужных координатах и поле
+        (row,col) - верхний левый угол корабля
+        direction: "hor", "ver" - читается из параметра
+        * работает и для игрока, и для компьютера
+        После каждой постановки корабля вы получаете свободные ячейки,
+        в какую-то из них надо попытать поставить корабль*/
+    }
 
-        //Получаем координтаты нажатой клетки
-        int tappedX = getX(tappedCell);
-        int tappedY = getY(tappedCell);
-        //ADD YOUR CODE HERE
-        //....
+    boolean can_place(GameCell[][] field, int row, int col, int size, String direction) {
+        /*Возращает, можно ли поставить корабль*/
+        return true;
+    }
 
+    int[][] get_free_cells(GameCell[][] field) {
+        /*Возвращает индексы ячеек у которых рядом нет кораблей первая первая размерность - ячейки
+        * ячейка 1: row1, col1
+        * ячейка 2: row2, col2
+        * ...*/
+        return new int[0][0];
+    }
+
+    void close_cells_for_building(GameCell[][] field, int size, String direction) {
+        /*Закрывает для нажатия определённые кнопки при расстановке корабля с определённым и
+        размером и направлением*/
+    }
+
+    void redraw_ship() {
+        /*При повороте корабля он пропадает в поле и перерисовывается в интерфейсе*/
+    }
+
+    boolean check_end_of_build() {
+        /*Вызывается после постановки каждого корабля*/
+        /*После постановки последнего корабля*/
+        return true;
+    }
+
+    void player_shot(int row, int col) {
+        /*Обработка выстрела игрока по полю противника
+        * Информационное составляющее поля противника должно быть изменено
+        * При попадании не менять ход*/
+    }
+
+    void check_win() {
+        /*Проверяется выигрыш одного из игроков*/
+    }
+
+    void choose_cell_for_shoot() {
+        /*Выбор ячейки для хода противника*/
+    }
+
+    void enemy_shot() {
+        /*Обработка выстрела противника по полю игрока
+        * Информация меняется
+        * При попадании не менять ход*/
+    }
+
+    boolean is_exist(int x1, int y1) {
+        // Проверяет ячейку на существование
+        return (x1 >= 0 && x1 <= 9 && y1 >= 0 && y1 <= 9);
+    }
+
+    boolean is_near(int x1, int y1, int x2, int y2) {
+        // Проверяет ячейку на нахождение рядом по вертикали или горизонтали
+        return ((x1 == x2 && y1 != y2) || (x1 != x2 && y1 == y2));
     }
 
     protected int getX(View v) {
-        return Integer.parseInt(((String) v.getTag()).split(",")[1]);
+        return Integer.parseInt(((String) v.getTag()).split(",")[1]) ;
     }
 
     protected int getY(View v) {
         return Integer.parseInt(((String) v.getTag()).split(",")[0]);
     }
-
-    protected void placeShips(int length4, int length3, int length2, int length1) {
-        if (SoloGameMode) {
-            for (int i = 0; i < length4; i++) placeShip(4);
-            for (int i = 0; i < length3; i++) placeShip(3);
-            for (int i = 0; i < length2; i++) placeShip(2);
-            for (int i = 0; i < length1; i++) placeShip(1);
-        }
-        else {
-            for (int i = 0; i < length4; i++) placeShip(4, 1);
-            for (int i = 0; i < length3; i++) placeShip(3, 1);
-            for (int i = 0; i < length2; i++) placeShip(2, 1);
-            for (int i = 0; i < length1; i++) placeShip(1, 1);
-
-            for (int i = 0; i < length4; i++) placeShip(4, 2);
-            for (int i = 0; i < length3; i++) placeShip(3, 2);
-            for (int i = 0; i < length2; i++) placeShip(2, 2);
-            for (int i = 0; i < length1; i++) placeShip(1, 2);
-        }
-    }
-
-    protected void placeShip(int length) {}
-
-    protected void placeShip(int length, int player) {}
-
-    protected boolean checkWin() { return false;}
-
-    int [] generate_mas_for_bot_turn(){
-        int sum=0;
-        for (int i=1; i<HEIGHT; i++){
-            for (int j=1; j<WIDTH; j++){
-                if (!openStatus[i][j])
-                    sum++;
-            }
-        }
-        int [] mas_check_for_bot=new int [sum];
-        sum=0;
-        for (int i=1; i<HEIGHT; i++){
-            for (int j=1; j<WIDTH; j++){
-                if (!openStatus[i][j]){
-                    mas_check_for_bot[sum]=i*10+j;
-                    sum++;
-                }
-            }
-        }
-        return mas_check_for_bot;
-    }
-
-    void choose_tap(){
-        int len=0;
-        Random random = new Random();
-        if (sum_hit>1){
-            int k=0;
-            if (temp_turn_i>1 && temp_turn_j>1){
-                k= random.nextInt(4);
-            }
-            else if (temp_turn_i==1 && temp_turn_j>1){
-                k=random.nextInt(3);
-            }
-            else if (temp_turn_i>1 && temp_turn_j==1){
-            }
-            if (k==0){
-                if (!openStatus[temp_turn_i-1][temp_turn_j]){
-                    openStatus[temp_turn_i-1][temp_turn_j]=true;
-                    if (status[temp_turn_i-1][temp_turn_j]){
-                        hit=true;
-                        sum_hit++;
-                        botTurn();
-                    }
-                }
-                else k=1;
-            }
-            if (k==1){
-                if (!openStatus[temp_turn_i][temp_turn_j+1]){
-                    openStatus[temp_turn_i][temp_turn_j+1]=true;
-                    if (status[temp_turn_i][temp_turn_j+1]){
-                        hit=true;
-                        sum_hit++;
-                        botTurn();
-                    }
-                }
-                else k=2;
-            }
-            if (k==2){
-                if (!openStatus[temp_turn_i][temp_turn_j-1]){
-                    openStatus[temp_turn_i][temp_turn_j-1]=true;
-                    if (status[temp_turn_i][temp_turn_j-1]){
-                        hit=true;
-                        sum_hit++;
-                        botTurn();
-                    }
-                }
-                else k=3;
-            }
-            if (k==3){
-                if (!openStatus[temp_turn_i+1][temp_turn_j]){
-                    openStatus[temp_turn_i+1][temp_turn_j]=true;
-                    if (status[temp_turn_i+1][temp_turn_j]){
-                        hit=true;
-                        sum_hit++;
-                        botTurn();
-                    }
-                }
-            }
-        }
-
-
-    }
-    protected void botTurn() {
-        if (hit){
-            choose_tap();
-        } else{
-            int [] mas_check_for_bot=generate_mas_for_bot_turn();
-            Random random = new Random();
-            int k = random.nextInt(mas_check_for_bot.length);
-            int turn_i=mas_check_for_bot[k]/10;
-            int turn_j=mas_check_for_bot[k]%10;
-            openStatus[turn_i][turn_j]=true;
-            if (status[turn_i][turn_j]){
-                hit=true;
-                temp_turn_i=turn_i;
-                temp_turn_j=turn_j;
-                sum_hit++;
-                botTurn();
-            }
-        }
-
-    }
-
-    protected boolean playerTurn() { return false;}
-
-    protected boolean playerTurn(int player) { return false;}//для мультиплеера
-
-    protected void changeGameMode() {}
-
-    protected void refresh() {}
-
-    protected void changePlayer() {}
 
     void makeCells() {
         cells = new Button[HEIGHT][WIDTH];
@@ -242,25 +191,89 @@ public class CellsActivity extends Activity implements OnClickListener,
         GridLayout cellsLayoutEnemy = (GridLayout) findViewById(R.id.CellsLayoutEnemy);
         cellsLayout.removeAllViews();
         cellsLayoutEnemy.removeAllViews();
-        cellsLayout.setColumnCount(WIDTH);
-        cellsLayoutEnemy.setColumnCount(WIDTH);
-        for (int i = 0; i < HEIGHT; i++)
-            for (int j = 0; j < WIDTH; j++) {
+        cellsLayout.setColumnCount(WIDTH+1);
+        cellsLayoutEnemy.setColumnCount(WIDTH+1);
+        for (int i = -1; i < HEIGHT; i++)
+            for (int j = -1; j < WIDTH; j++) {
                 LayoutInflater inflater = (LayoutInflater) getApplicationContext()
                         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                if (i == -1) {
+                    indexHorizontal[j + 1] = (Button) inflater.inflate(R.layout.cell, cellsLayout, false);
+                    indexHorizontal[j+1].setText(Integer.toString(j+1));
+                    indexHorizontal[j+1].setTag(i + "," + j);
+                    cellsLayout.addView(indexHorizontal[j + 1]);
+                    indexHorizontalEnemy[j + 1] = (Button) inflater.inflate(R.layout.cell, cellsLayout, false);
+                    indexHorizontalEnemy[j+1].setText(Integer.toString(j+1));
+                    indexHorizontalEnemy[j+1].setTag(i + "," + j);
+                    cellsLayoutEnemy.addView(indexHorizontalEnemy[j + 1]);
+                    continue;
+                }
+                if (j == -1 && i > -1) {
+                    indexVertical[i + 1] = (Button) inflater.inflate(R.layout.cell, cellsLayout, false);
+                    indexVertical[i+1].setText(Integer.toString(i+1));
+                    indexVertical[i+1].setTag(i + "," + j);
+                    cellsLayout.addView(indexVertical[i + 1]);
+                    indexVerticalEnemy[i + 1] = (Button) inflater.inflate(R.layout.cell, cellsLayout, false);
+                    indexVerticalEnemy[i+1].setText(Integer.toString(i+1));
+                    indexVerticalEnemy[i+1].setTag(i + "," + j);
+                    cellsLayoutEnemy.addView(indexVerticalEnemy[i + 1]);
+                    continue;
+                }
                 cells[i][j] = (Button) inflater.inflate(R.layout.cell, cellsLayout, false);
-                cells[i][j].setOnClickListener(this);
-                cells[i][j].setOnLongClickListener(this);
+                //------обрабочик нажатий во время рассновки корбалей
+                OnClickListener clickListenerForPlacing = new OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (phase == "build") {
+                            Stub.show(context,"inside onClick()");
+                        }
+                        else {
+                            Stub.show(context,"Сейчас не фаза подготовки");
+                        }
+                        // todo: Вызвать перерисовку show_field
+                    }
+                };
+                //---------------------------------------------------
+                cells[i][j].setOnClickListener(clickListenerForPlacing);
                 cells[i][j].setTag(i + "," + j);
                 cellsLayout.addView(cells[i][j]);
-
                 LayoutInflater inflaterEnemy = (LayoutInflater) getApplicationContext()
                         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                //------обрабочик нажатий во время хода игрока
+                OnClickListener clickListenerForYourTurn = new OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (phase == "yourTurn") {
+                            Stub.show(context,"inside onClick()");
+                            // TODO: 01.12.2020 обработка нажатия на уже обстрелянную клетку
+                        }
+                        else {
+                            // ?
+                            Stub.show(context,"сейчас не ваш ход");
+                        }
+                        // todo: Вызвать перерисовку show_field
+                    }
+                };
+                // TODO: 01.12.2020 добавить обработчики для кнопки поворота, и для кнопки постановки
                 cellsEnemy[i][j] = (Button) inflaterEnemy.inflate(R.layout.cell, cellsLayoutEnemy, false);
-                cellsEnemy[i][j].setOnClickListener(this);
-                cellsEnemy[i][j].setOnLongClickListener(this);
+                cellsEnemy[i][j].setOnClickListener(clickListenerForYourTurn);
                 cellsEnemy[i][j].setTag(i + "," + j);
                 cellsLayoutEnemy.addView(cellsEnemy[i][j]);
             }
+    }
+
+    class MyTimer extends CountDownTimer
+    {
+        MyTimer()
+        {
+            super(100000, 100);
+        }
+        @Override
+        public void onTick(long millisUntilFinished) {
+            // TODO: 01.12.2020 Анимация хода противника делать в последнюю очередь
+        }
+        @Override
+        public void onFinish() {
+        }
     }
 }
