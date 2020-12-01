@@ -19,18 +19,8 @@ public class CellsActivity extends Activity{
     private final Context context = this;
     private int WIDTH = 10;
     private int HEIGHT = 10;
-    int countShips;
-    int countDestructedShips;
-    int countDestructedShipsEnemy;
-
     private String phase; // build, yourTurn, botTurn
-    private boolean SoloGameMode;
-    private boolean firstPlayerTurn;
 
-    private boolean[][] status;
-    private boolean[][] statusEnemy;
-    private boolean[][] openStatus;
-    private boolean[][] openStatusEnemy;
     private Button[][] cellsEnemy;
     private Button[][] cells;
     private Button[] indexHorizontal = new Button[11];
@@ -43,9 +33,7 @@ public class CellsActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cells);
         makeCells();
-
         generate();
-
     }
 
     void generate() {
@@ -54,26 +42,12 @@ public class CellsActivity extends Activity{
 
 
     protected int getX(View v) {
-        return Integer.parseInt(((String) v.getTag()).split(",")[1]) - 1; //-1 потому, что в таблице первая строка и столбец под координаты
+        return Integer.parseInt(((String) v.getTag()).split(",")[1]) ;
     }
 
     protected int getY(View v) {
-        return Integer.parseInt(((String) v.getTag()).split(",")[0]) - 1; //-1 потому, что в таблице первая строка и столбец под координаты
+        return Integer.parseInt(((String) v.getTag()).split(",")[0]);
     }
-
-    protected boolean checkWin() { return false;}
-
-    protected void botTurn() {}
-
-    protected boolean playerTurn() { return false;}
-
-    protected boolean playerTurn(int player) { return false;}//для мультиплеера
-
-    protected void changeGameMode() {}
-
-    protected void refresh() {}
-
-    protected void changePlayer() {}
 
     void makeCells() {
         cells = new Button[HEIGHT][WIDTH];
