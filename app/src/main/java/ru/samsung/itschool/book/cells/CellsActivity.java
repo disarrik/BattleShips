@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,6 +21,7 @@ public class CellsActivity extends Activity{
     private int WIDTH = 10;
     private int HEIGHT = 10;
     private String phase; // build, yourTurn, botTurn
+    private String direction = "hor";
 
     private Button[][] cellsEnemy;
     private Button[][] cells;
@@ -27,6 +29,29 @@ public class CellsActivity extends Activity{
     private Button[] indexVertical = new Button[11];
     private Button[] indexHorizontalEnemy = new Button[11];
     private Button[] indexVerticalEnemy = new Button[11];
+
+    // todo: Создать кнопку для поворота кораблей при расстановке
+    // TODO: 01.12.2020 Интерфейс говно - надо доработатть
+    // todo: Дописать методы класса
+    protected class GameCell {
+        public int row; // строчка
+        public int col; // колонка
+        public boolean opened; // открыта ли ячейка
+        public boolean isFired; // стреляли
+        public boolean isShip; // стоит ли корабль
+        public boolean isNear; // стоит ли корабль рядом
+        public boolean isClickable; // можно ли нажать
+        public int shipSize; // размер корабля
+        public int textureNumber; // todo: текстуры?
+
+        void GameCell(int row, int col) {
+            this.row = row;
+            this.col = col;
+        }
+    }
+
+    private GameCell[][] playerField = new GameCell[HEIGHT][WIDTH]; // поле игрока
+    private GameCell[][] enemyField = new GameCell[HEIGHT][WIDTH]; // поле противника
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +65,114 @@ public class CellsActivity extends Activity{
         phase = "build";
     }
 
+    /*
+    onCreate() -> makeCells()
+    onCreate() -> generate()
+    generate() -> create_enemy_field()
+    create_enemy_field() -> get_free_cells()
+    create_enemy_field() -> can_place()
+    create_enemy_field() -> create_ship()
+    generate() -> close_cells_for_building()
+
+    phase: build
+    click on_player_field -> create_ship()
+    create_ship -> close_cells_for_building()
+    click on_rotate(button) -> redraw_ship()
+    click on_rotate(button) -> close_cells_for_building()
+    create_ship() ->  check_end_of_build()
+    click on_rotate(button) -> redraw_field()
+    create_ship() -> redraw()
+
+    phase: player
+    click on_enemy_field -> player_shot() (при условии правильности)
+    click on_enemy_field -> redraw_field()
+    player_shot -> check_win()
+    player_shot() -> choose_cells_for_shoot() (при условии промаха)
+    player_shot() -> phase="enemy"
+
+    phase: enemy
+    choose_cell_for_shoot() -> enemy_shot()
+    enemy_shot() -> redraw_field()
+    enemy_shot() -> check_win()
+    enemy_shot() -> phase="player" (при условии промаха)
+    * */
+
+    void show_field() {
+        /*Функция идёт по массиву данных и отрисовывает их на кнопках*/
+        /* Нарисовать открытые поля с текстурой(?) выделить подбитые, потопленные
+        * Как выделять - придумать*/
+    }
+
+    void create_enemy_field() {
+        /*Создает поле противника*/
+    }
+
+    void create_ship(GameCell[][] field, int row, int col, int size) {
+        /* Функция создаёт корабль в нужных координатах и поле
+        (row,col) - верхний левый угол корабля
+        direction: "hor", "ver" - читается из параметра
+        * работает и для игрока, и для компьютера
+        После каждой постановки корабля вы получаете свободные ячейки,
+        в какую-то из них надо попытать поставить корабль*/
+    }
+
+    boolean can_place(GameCell[][] field, int row, int col, int size, String direction) {
+        /*Возращает, можно ли поставить корабль*/
+        return true;
+    }
+
+    int[][] get_free_cells(GameCell[][] field) {
+        /*Возвращает индексы ячеек у которых рядом нет кораблей первая первая размерность - ячейки
+        * ячейка 1: row1, col1
+        * ячейка 2: row2, col2
+        * ...*/
+        return new int[0][0];
+    }
+
+    void close_cells_for_building(GameCell[][] field, int size, String direction) {
+        /*Закрывает для нажатия определённые кнопки при расстановке корабля с определённым и
+        размером и направлением*/
+    }
+
+    void redraw_ship() {
+        /*При повороте корабля он пропадает в поле и перерисовывается в интерфейсе*/
+    }
+
+    boolean check_end_of_build() {
+        /*Вызывается после постановки каждого корабля*/
+        /*После постановки последнего корабля*/
+        return true;
+    }
+
+    void player_shot(int row, int col) {
+        /*Обработка выстрела игрока по полю противника
+        * Информационное составляющее поля противника должно быть изменено
+        * При попадании не менять ход*/
+    }
+
+    void check_win() {
+        /*Проверяется выигрыш одного из игроков*/
+    }
+
+    void choose_cell_for_shoot() {
+        /*Выбор ячейки для хода противника*/
+    }
+
+    void enemy_shot() {
+        /*Обработка выстрела противника по полю игрока
+        * Информация меняется
+        * При попадании не менять ход*/
+    }
+
+    boolean is_exist(int x1, int y1) {
+        // Проверяет ячейку на существование
+        return (x1 >= 0 && x1 <= 9 && y1 >= 0 && y1 <= 9);
+    }
+
+    boolean is_near(int x1, int y1, int x2, int y2) {
+        // Проверяет ячейку на нахождение рядом по вертикали или горизонтали
+        return ((x1 == x2 && y1 != y2) || (x1 != x2 && y1 == y2));
+    }
 
     protected int getX(View v) {
         return Integer.parseInt(((String) v.getTag()).split(",")[1]) ;
@@ -95,6 +228,7 @@ public class CellsActivity extends Activity{
                         else {
                             Stub.show(context,"Сейчас не фаза подготовки");
                         }
+                        // todo: Вызвать перерисовку show_field
                     }
                 };
                 //---------------------------------------------------
@@ -109,17 +243,35 @@ public class CellsActivity extends Activity{
                     public void onClick(View view) {
                         if (phase == "yourTurn") {
                             Stub.show(context,"inside onClick()");
+                            // TODO: 01.12.2020 обработка нажатия на уже обстрелянную клетку
                         }
                         else {
+                            // ?
                             Stub.show(context,"сейчас не ваш ход");
                         }
+                        // todo: Вызвать перерисовку show_field
                     }
                 };
-                //---------------------------------------------------
+                // TODO: 01.12.2020 добавить обработчики для кнопки поворота, и для кнопки постановки
                 cellsEnemy[i][j] = (Button) inflaterEnemy.inflate(R.layout.cell, cellsLayoutEnemy, false);
                 cellsEnemy[i][j].setOnClickListener(clickListenerForYourTurn);
                 cellsEnemy[i][j].setTag(i + "," + j);
                 cellsLayoutEnemy.addView(cellsEnemy[i][j]);
             }
+    }
+
+    class MyTimer extends CountDownTimer
+    {
+        MyTimer()
+        {
+            super(100000, 100);
+        }
+        @Override
+        public void onTick(long millisUntilFinished) {
+            // TODO: 01.12.2020 Анимация хода противника делать в последнюю очередь
+        }
+        @Override
+        public void onFinish() {
+        }
     }
 }
