@@ -155,19 +155,21 @@ public class CellsActivity extends Activity{
     void check_win() {
         /*Проверяется выигрыш одного из игроков*/
     }
+    /** Начало бота*/
     boolean is_exist(int x1, int y1) {
         // Проверяет ячейку на существование
         return (x1 >= 0 && x1 <= 9 && y1 >= 0 && y1 <= 9);
     }
-
     boolean is_near(int x1, int y1, int x2, int y2) {
         // Проверяет ячейку на нахождение рядом по вертикали или горизонтали
         return ((x1 == x2 && y1 != y2) || (x1 != x2 && y1 == y2));
     }
     void choose_pretend(int i, int j){
-        if (is_exist(i,j) && !playerField[i][j].isFired && is_near(i,j, turn_i, turn_j)) {
-            mas_for_choose_tap[sum_pretend] = (i) * 10 + j;//добавление в массив индексов элемента
-            sum_pretend++;
+        if (is_exist(i,j) && is_near(i,j, turn_i, turn_j)) {
+            if (!playerField[i][j].isFired) {
+                mas_for_choose_tap[sum_pretend] = (i) * 10 + j;//добавление в массив индексов элемента
+                sum_pretend++;
+            }
         }
     }
     void sort_mas_for_choose(){
@@ -181,10 +183,17 @@ public class CellsActivity extends Activity{
             }
         }
     }
-
     int [] mas_for_choose_tap=new int[4];
     int pretend_turn_i=0;
     int pretend_turn_j=0;
+    int sum_pretend=0;
+    void first_hit_choose_pretend(){
+        for (int i=turn_i-1; i<=turn_i+1; i++){
+            for (int j=turn_j-1; j<=turn_j+1; j++){
+                choose_pretend(i,j);
+            }
+        }
+    }
     void delete_pretend(){
         if (pretend_turn_i==turn_i){
             for (int i=0; i<=4; i++){
@@ -203,55 +212,64 @@ public class CellsActivity extends Activity{
         sort_mas_for_choose();
         sum_pretend=0;
         for (int i=0; i<4; i++){
-            if (mas_for_choose_tap[i]!=0){
+            if (mas_for_choose_tap[i]!=0){ //требует доработки, так как тут максимум может быть 1 претендент
                 sum_pretend++;
             }
         }
     }
-    int sum_pretend=0;
+    void add_and_verify_pretend(){
+        if (pretend_turn_i==turn_i) {
+            if (pretend_turn_j > turn_j) {
+                if (pretend_turn_j < WIDTH - 1)
+                    if (!playerField[pretend_turn_i][pretend_turn_j + 1].isFired) {
+                        mas_for_choose_tap[sum_pretend + 1] = pretend_turn_i * 10 + pretend_turn_j + 1;
+                        sum_pretend++;
+                    }
+            } else if (pretend_turn_j > 0) {
+                if (!playerField[pretend_turn_i][pretend_turn_j - 1].isFired) {
+                    mas_for_choose_tap[sum_pretend + 1] = pretend_turn_i * 10 + pretend_turn_j - 1;
+                    sum_pretend++;
+                }
+            }
+        }else{
+        if (pretend_turn_i>turn_i){
+            if (pretend_turn_i<HEIGHT-1)
+                if (!playerField[pretend_turn_i+1][pretend_turn_j].isFired){
+                    mas_for_choose_tap[sum_pretend+1]=(pretend_turn_i+1)*10+pretend_turn_j;
+                    sum_pretend++;
+                }
+        }
+        else if (pretend_turn_i>0){
+            if (!playerField[pretend_turn_i-1][pretend_turn_j].isFired){
+                mas_for_choose_tap[sum_pretend+1]=(pretend_turn_i-1)*10+pretend_turn_j-1;
+                sum_pretend++;
+            }
+        }
+    }
+
+    }
     void choose_cell_for_shoot() {
         /*Выбор ячейки для хода противника*/
         Random random = new Random();
-        if (sum_hit==1){
-            for (int i=turn_i-1; i<=turn_i+1; i++){
-                for (int j=turn_j-1; j<=turn_j+1; j++){
-                    choose_pretend(i,j);
-                }
-            }
-        }
-//        else{
-//            if (pretend_turn_i==turn_i){
-//                if (pretend_turn_j>turn_j){
-//                    if (pretend_turn_j<WIDTH-1)
-//                        mas_for_choose_tap[sum_pretend+1]=pretend_turn_i*10+pretend_turn_j+1;
-//                }
-//                else
-//                    if (pretend_turn_j>0)
-//                        mas_for_choose_tap[sum_pretend+1]=pretend_turn_i*10+pretend_turn_j-1;
-//
-//            }else{
-//                if (pretend_turn_i>turn_i){
-//                    if (pretend_turn_i<HEIGHT-1)
-//                        mas_for_choose_tap[sum_pretend+1]=(pretend_turn_i+1)*10+pretend_turn_j;
-//                }
-//                else
-//                if (pretend_turn_i>0)
-//                    mas_for_choose_tap[sum_pretend+1]=(pretend_turn_i-1)*10+pretend_turn_j-1;
-//            }
-//        }
         int rand_choose=random.nextInt(sum_pretend);
         playerField[mas_for_choose_tap[rand_choose]/10][mas_for_choose_tap[rand_choose]%10].isFired=true;
+        mas_for_choose_tap[rand_choose]=0;
+        sum_pretend--;
+        sort_mas_for_choose();
         if (playerField[mas_for_choose_tap[rand_choose]/10][mas_for_choose_tap[rand_choose]%10].isShip){
             sum_hit++;
             pretend_turn_i=mas_for_choose_tap[rand_choose]/10;
             pretend_turn_j=mas_for_choose_tap[rand_choose]%10;
             if (sum_hit==2)
                 delete_pretend();
+            add_and_verify_pretend();
             if (sum_hit==playerField[mas_for_choose_tap[rand_choose]/10][mas_for_choose_tap[rand_choose]%10].shipSize){
                 hit=false;
+                //дописать обнуление необходимых параметров
+                //пустой ли массив для выбора хода бота к этому моменту?
                 //todo анимация потопления корабля
             }
-            enemy_shot();
+            enemy_shot();//это сработает только если было попадание
             //todo отрисовка анимации попадания
         }
     }
@@ -269,7 +287,6 @@ public class CellsActivity extends Activity{
         }
         return mas_check_for_bot;
     }
-    
     void enemy_shot() {
         /*Обработка выстрела противника по полю игрока
         * Информация меняется
@@ -277,7 +294,7 @@ public class CellsActivity extends Activity{
         //todo задержка?
         if (hit) {
             choose_cell_for_shoot();
-        }else{
+        } else{
             int [] mas_check_for_bot=generate_mas_for_bot_turn();
             Random random = new Random();
             int k = random.nextInt(sum_suitable_cell);
@@ -289,13 +306,12 @@ public class CellsActivity extends Activity{
                 turn_i=temp_turn_i;
                 turn_j=temp_turn_j;
                 sum_hit++;
+                first_hit_choose_pretend();
                 enemy_shot();
             }
         }
     }
-
-
-
+    /** Конец бота*/
     protected int getX(View v) {
         return Integer.parseInt(((String) v.getTag()).split(",")[1]) ;
     }
