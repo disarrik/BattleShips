@@ -341,11 +341,9 @@ public class CellsActivity extends Activity{
         return ((x1 == x2 && y1 != y2) || (x1 != x2 && y1 == y2));
     }
     void choose_pretend(int i, int j){
-        if (is_exist(i,j) && is_near(i,j, turn_i, turn_j)) {
-            if (!playerField[i][j].isFired) {
+        if (is_exist(i,j) && is_near(i,j, turn_i, turn_j) && !playerField[i][j].isFired) {
                 mas_for_choose_tap[sum_pretend] = (i) * 10 + j;//добавление в массив индексов элемента
                 sum_pretend++;
-            }
         }
     }
     void sort_mas_for_choose(){
@@ -372,14 +370,14 @@ public class CellsActivity extends Activity{
     }
     void delete_pretend(){
         if (pretend_turn_i==turn_i){
-            for (int i=0; i<=4; i++){
+            for (int i=0; i<4; i++){
                 if (mas_for_choose_tap[i]/10!=turn_i){
                     mas_for_choose_tap[i]=0;
                 }
             }
         }
         else{
-            for (int i=0; i<=4; i++){
+            for (int i=0; i<4; i++){
                 if (mas_for_choose_tap[i]%10!=turn_j){
                     mas_for_choose_tap[i]=0;
                 }
@@ -427,13 +425,11 @@ public class CellsActivity extends Activity{
     void choose_cell_for_shoot() {
         /*Выбор ячейки для хода противника*/
         Random random = new Random();
-        int rand_choose=random.nextInt(sum_pretend);
+        int rand_choose=random.nextInt(sum_pretend+1);
         playerField[mas_for_choose_tap[rand_choose]/10][mas_for_choose_tap[rand_choose]%10].isFired=true;
-        mas_for_choose_tap[rand_choose]=0;
-        sum_pretend--;
-        sort_mas_for_choose();
+        cells[mas_for_choose_tap[rand_choose]/10][mas_for_choose_tap[rand_choose]%10].setBackgroundColor(Color.GRAY);
         if (playerField[mas_for_choose_tap[rand_choose]/10][mas_for_choose_tap[rand_choose]%10].isShip){
-            sum_hit++;
+            cells[mas_for_choose_tap[rand_choose]/10][mas_for_choose_tap[rand_choose]%10].setBackgroundColor(Color.BLACK);
             pretend_turn_i=mas_for_choose_tap[rand_choose]/10;
             pretend_turn_j=mas_for_choose_tap[rand_choose]%10;
             if (sum_hit==2)
@@ -441,27 +437,38 @@ public class CellsActivity extends Activity{
             add_and_verify_pretend();
             if (sum_hit==playerField[mas_for_choose_tap[rand_choose]/10][mas_for_choose_tap[rand_choose]%10].shipSize){
                 hit=false;
+                sum_pretend=0;
                 //дописать обнуление необходимых параметров
                 //пустой ли массив для выбора хода бота к этому моменту?
                 //todo анимация потопления корабля
             }
+            mas_for_choose_tap[rand_choose]=0;
+            sum_pretend--;
+            Stub.show(context, Integer.toString(sum_pretend));
+            sort_mas_for_choose();
+            sum_hit++;
             enemy_shot();//это сработает только если было попадание
             //todo отрисовка анимации попадания
+        }
+        else{
+            phase = "yourTurn";
+            mas_for_choose_tap[rand_choose]=0;
+            sum_pretend--;
+            Stub.show(context, Integer.toString(sum_pretend));
+            sort_mas_for_choose();
         }
     }
     int sum_suitable_cell=0, turn_i, turn_j, sum_hit=0;
     boolean hit=false;
-    int [] generate_mas_for_bot_turn(){ //создает массив из доступных для удара ячеек
-        int [] mas_check_for_bot=new int [100];
+    void generate_mas_for_bot_turn(int []mas_check_for_bot){ //создает массив из доступных для удара ячеек
         for (int i=0; i<HEIGHT; i++){
             for (int j=0; j<WIDTH; j++){
-                if (playerField[i][j].isFired){
+                if (!playerField[i][j].isFired){
                     mas_check_for_bot[sum_suitable_cell]=i*10+j;
                     sum_suitable_cell++;
                 }
             }
         }
-        return mas_check_for_bot;
     }
     void enemy_shot() {
         /*Обработка выстрела противника по полю игрока
@@ -471,19 +478,31 @@ public class CellsActivity extends Activity{
         if (hit) {
             choose_cell_for_shoot();
         } else{
-            int [] mas_check_for_bot=generate_mas_for_bot_turn();
+            int [] mas_check_for_bot=new int[101];
+            generate_mas_for_bot_turn(mas_check_for_bot);
             Random random = new Random();
             int k = random.nextInt(sum_suitable_cell);
             int temp_turn_i=mas_check_for_bot[k]/10;
             int temp_turn_j=mas_check_for_bot[k]%10;
             playerField[temp_turn_i][temp_turn_j].isFired=true;
+            cells[temp_turn_i][temp_turn_j].setBackgroundColor(Color.GRAY);
             if (playerField[temp_turn_i][temp_turn_j].isShip){
-                hit=true;
-                turn_i=temp_turn_i;
-                turn_j=temp_turn_j;
-                sum_hit++;
-                first_hit_choose_pretend();
-                enemy_shot();
+                cells[temp_turn_i][temp_turn_j].setBackgroundColor(Color.BLACK);
+                if (playerField[temp_turn_i][temp_turn_j].shipSize == 1){
+                    hit=false;
+                }else{
+                    sum_suitable_cell=0;
+                    hit=true;
+                    turn_i=temp_turn_i;
+                    turn_j=temp_turn_j;
+                    sum_hit++;
+                    first_hit_choose_pretend();
+                    enemy_shot();
+                }
+            }
+            else{
+                sum_suitable_cell=0;
+                phase = "yourTurn";
             }
         }
     }

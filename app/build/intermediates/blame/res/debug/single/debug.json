@@ -1,14 +1,14 @@
 [
     {
-        "merged": "C:\\Users\\disar\\samsung\\Android\\github\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\layout_cells.xml.flat",
-        "source": "C:\\Users\\disar\\samsung\\Android\\github\\BattleShips\\app\\src\\main\\res\\layout\\cells.xml"
+        "merged": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\layout_cell.xml.flat",
+        "source": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\src\\main\\res\\layout\\cell.xml"
     },
     {
-        "merged": "C:\\Users\\disar\\samsung\\Android\\github\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\layout_cell.xml.flat",
-        "source": "C:\\Users\\disar\\samsung\\Android\\github\\BattleShips\\app\\src\\main\\res\\layout\\cell.xml"
+        "merged": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\layout_cells.xml.flat",
+        "source": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\src\\main\\res\\layout\\cells.xml"
     },
     {
-        "merged": "C:\\Users\\disar\\samsung\\Android\\github\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_launcher.png.flat",
-        "source": "C:\\Users\\disar\\samsung\\Android\\github\\BattleShips\\app\\src\\main\\res\\drawable\\ic_launcher.png"
+        "merged": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_launcher.png.flat",
+        "source": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\src\\main\\res\\drawable\\ic_launcher.png"
     }
 ]

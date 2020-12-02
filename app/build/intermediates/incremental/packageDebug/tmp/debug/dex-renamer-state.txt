@@ -1,9 +1,4 @@
-<<<<<<< Updated upstream
-#Wed Dec 02 18:24:57 MSK 2020
-base.0=C\:\\Users\\disar\\samsung\\Android\\github\\BattleShips\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
-=======
-#Wed Dec 02 17:59:41 MSK 2020
-base.0=C\:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
->>>>>>> Stashed changes
+#Wed Dec 02 19:47:23 MSK 2020
+base.0=C\:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\out\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex

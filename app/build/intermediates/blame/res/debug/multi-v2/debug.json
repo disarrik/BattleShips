@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\disar\\samsung\\Android\\github\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\values_values.arsc.flat",
+            "outputFile": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\values_values.arsc.flat",
             "map": [
                 {
-                    "source": "C:\\Users\\disar\\samsung\\Android\\github\\BattleShips\\app\\src\\main\\res\\values\\strings.xml",
+                    "source": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\src\\main\\res\\values\\strings.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\disar\\samsung\\Android\\github\\BattleShips\\app\\src\\main\\res\\values\\styles.xml",
+                    "source": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\src\\main\\res\\values\\styles.xml",
                     "from": {
                         "startLines": "6,15",
                         "startColumns": "4,4",
