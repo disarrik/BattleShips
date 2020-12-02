@@ -76,7 +76,7 @@ public class CellsActivity extends Activity{
                 enemyField[i][j]=new GameCell();
             }
         }
-//        create_enemy_field();
+        create_enemy_field();
     }
     /*
     onCreate() -> makeCells()
@@ -116,47 +116,47 @@ public class CellsActivity extends Activity{
         * Как выделять - придумать*/
     }
 
-//    void create_enemy_field() {
-//        Random random = new Random();
-//        String choose_direction_for_enemy=(random.nextInt(2)==1? "ver":"hor");
-//        int rand_row=random.nextInt(10);
-//        int rand_col=random.nextInt(10);
-//        int size_enemy_ship=0;
-//        for (int i=count_ship_for_enemy; i>0; i--){
-//            switch(i){
-//                case(10):
-//                    size_enemy_ship=4;
-//                    break;
-//                case(9):
-//                case(8):
-//                    size_enemy_ship=3;
-//                    break;
-//                case(7):
-//                case(6):
-//                case(5):
-//                    size_enemy_ship=2;
-//                    break;
-//                case(4):
-//                case(3):
-//                case(2):
-//                case(1):
-//                    size_enemy_ship=1;
-//                    break;
-//            }
-//            Stub.show(context, Integer.toString(i));
-//            while (!can_place(enemyField, rand_row, rand_col, size_enemy_ship,choose_direction_for_enemy)){
-//                choose_direction_for_enemy=(random.nextInt(2)==1? "ver":"hor");
-//                rand_row=random.nextInt(10);
-//                rand_col=random.nextInt(10);
-//            }
-//            create_ship(enemyField,rand_row,rand_col,size_enemy_ship, cellsEnemy);
-//        }
-//
-//        // рандомно выбирать вертикальное или горизонатльно направление
-//        //затем рандомно клетку до тех пока она не разрешить постановку
-//        //count_ship_for_enemy--;
-//        //вызывать neighbours;
-//    }
+    void create_enemy_field() {
+        Random random = new Random();
+        String choose_direction_for_enemy=(random.nextInt(2)==1? "ver":"hor");
+        int rand_row=random.nextInt(10);
+        int rand_col=random.nextInt(10);
+        int size_enemy_ship=0;
+        for (int i=count_ship_for_enemy; i>0; i--){
+            switch(i){
+                case(10):
+                    size_enemy_ship=4;
+                    break;
+                case(9):
+                case(8):
+                    size_enemy_ship=3;
+                    break;
+                case(7):
+                case(6):
+                case(5):
+                    size_enemy_ship=2;
+                    break;
+                case(4):
+                case(3):
+                case(2):
+                case(1):
+                    size_enemy_ship=1;
+                    break;
+            }
+            Stub.show(context, Integer.toString(i));
+            while (!can_place(enemyField, rand_row, rand_col, size_enemy_ship,choose_direction_for_enemy)){
+                choose_direction_for_enemy=(random.nextInt(2)==1? "ver":"hor");
+                rand_row=random.nextInt(10);
+                rand_col=random.nextInt(10);
+            }
+            create_ship_enemy(rand_row, rand_col,size_enemy_ship, choose_direction_for_enemy);
+        }
+
+        // рандомно выбирать вертикальное или горизонатльно направление
+        //затем рандомно клетку до тех пока она не разрешить постановку
+        //count_ship_for_enemy--;
+        //вызывать neighbours;
+    }
     void neighbours(int row, int col, GameCell[][] field, Button[][] but_cell){//установка соседей
         for (int i=row-1; i<=row+1; i++){
             for (int j=col-1; j<=col+1; j++){
@@ -167,7 +167,22 @@ public class CellsActivity extends Activity{
             }
         }
     }
-
+    void create_ship_enemy(int row, int col, int size, String direction_enemy_ship){
+        if (direction_enemy_ship.equals("ver")){
+            for (int i=row; i>row-size; i--){
+                enemyField[i][col].isShip=true;
+                cellsEnemy[i][col].setBackgroundColor(Color.RED);
+                //todo сделать отрисовку на поле
+                neighbours(i,col,enemyField,  cellsEnemy);
+            }
+        } else if (direction_enemy_ship.equals("hor")) {
+            for (int i = col; i < col + size; i++) {
+                enemyField[row][i].isShip = true;
+                cellsEnemy[row][i].setBackgroundColor(Color.RED);
+                neighbours(row, i, enemyField, cellsEnemy);
+            }
+        }
+    }
     void create_ship(int row, int col, int size) {
         if (can_place(playerField,row,col,size,direction)){
             if (direction.equals("ver")){
@@ -198,15 +213,15 @@ public class CellsActivity extends Activity{
         // todo надо перерисовать поле заново
     }
 
-    boolean can_place(GameCell[][] field, int row, int col, int size, String direction) {
+    boolean can_place(GameCell[][] field, int row, int col, int size, String dir) {
         /*Возращает, можно ли поставить корабль*/
-        if (direction.equals("ver")){
+        if (dir.equals("ver")){
             if (row-size<-1){
                 return false;
             }
             boolean check=true;
             for (int i=row; i>row-size; i--){
-                if (playerField[i][col].isShip || playerField[i][col].isNear){
+                if (field[i][col].isShip || field[i][col].isNear){
                     check=false;
                 }
             }
@@ -217,7 +232,7 @@ public class CellsActivity extends Activity{
             }
             boolean check=true;
             for (int i=col; i<col+size; i++){
-                if (playerField[row][i].isShip || playerField[row][i].isNear){
+                if (field[row][i].isShip || field[row][i].isNear){
                     check=false;
                 }
             }
@@ -580,7 +595,6 @@ public class CellsActivity extends Activity{
                 cellsLayoutEnemy.addView(cellsEnemy[i][j]);
             }
     }
-
     class MyTimer extends CountDownTimer
     {
         MyTimer()
