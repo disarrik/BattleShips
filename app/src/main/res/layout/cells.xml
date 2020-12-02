@@ -8,28 +8,47 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_horizontal|center_vertical"
-        android:orientation="vertical"
-        >
+        android:orientation="horizontal">
 
-        <GridLayout
-            android:id="@+id/CellsLayoutEnemy"
-            android:background="#E62618"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="5dp">
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="vertical"
+            >
+            <GridLayout
+                android:id="@+id/CellsLayoutEnemy"
+                android:background="#E62618"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp">
 
-        </GridLayout>
+            </GridLayout>
+            <GridLayout
+                android:id="@+id/CellsLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_green_light"
+                android:padding="5dp">
 
-        <GridLayout
-            android:layout_marginTop="50dp"
-            android:id="@+id/CellsLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/holo_green_light"
-            android:padding="5dp">
+            </GridLayout>
+        </LinearLayout>
 
-        </GridLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="vertical"
+            >
+            <GridLayout
+                android:id="@+id/MenuLayout"
+                android:background="#FFFFFF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp">
+
+            </GridLayout>
+        </LinearLayout>
 
     </LinearLayout>
 

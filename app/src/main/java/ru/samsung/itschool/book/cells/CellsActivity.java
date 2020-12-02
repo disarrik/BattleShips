@@ -2,6 +2,7 @@ package ru.samsung.itschool.book.cells;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import android.os.CountDownTimer;
@@ -22,6 +23,7 @@ public class CellsActivity extends Activity{
     private final Context context = this;
     private int WIDTH = 10;
     private int HEIGHT = 10;
+    private int countShipPlace = 9; // 1 - 4x, 2 - 3x, 3 - 2x, 3 - 1x
     private String phase; // build, yourTurn, botTurn
     private String direction = "hor";
 
@@ -31,6 +33,7 @@ public class CellsActivity extends Activity{
     private Button[] indexVertical = new Button[11];
     private Button[] indexHorizontalEnemy = new Button[11];
     private Button[] indexVerticalEnemy = new Button[11];
+    private Button[][] menu;
 
     // todo: Создать кнопку для поворота кораблей при расстановке
     // TODO: 01.12.2020 Интерфейс говно - надо доработатть
@@ -138,6 +141,32 @@ public class CellsActivity extends Activity{
 
     void redraw_ship() {
         /*При повороте корабля он пропадает в поле и перерисовывается в интерфейсе*/
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                menu[i][j].setBackgroundColor(Color.WHITE);
+                if (countShipPlace < 9) {
+                    if ((i == 0 && j == 0) || (i == 3 && j == 3)) continue;
+                }
+                if (countShipPlace < 7) {
+                    if ((i == 1 && j == 0) || (i == 3 && j == 2)) continue;
+                }
+                if (countShipPlace < 4) {
+                    if ((i == 2 && j == 0) || (i == 3 && j == 1)) continue;
+                }
+                if (countShipPlace < 1) {
+                    break;
+                }
+                if (direction == "hor") {
+                    if (j == 0) {
+                        menu[i][j].setBackgroundColor(Color.RED);
+                    }
+                } else if (direction == "ver") {
+                    if (i == 3) {
+                        menu[i][j].setBackgroundColor(Color.RED);
+                    }
+                }
+            }
+        }
     }
 
     boolean check_end_of_build() {
@@ -311,16 +340,58 @@ public class CellsActivity extends Activity{
             }
         }
     }
-    /** Конец бота*/
-    protected int getX(View v) {
+
+    boolean is_exist(int x1, int y1) {
+        // Проверяет ячейку на существование
+        return (x1 >= 0 && x1 <= 9 && y1 >= 0 && y1 <= 9);
+    }
+
+    boolean is_near(int x1, int y1, int x2, int y2) {
+        // Проверяет ячейку на нахождение рядом по вертикали или горизонтали
+        return ((x1 == x2 && y1 != y2) || (x1 != x2 && y1 == y2));
+    }
+
+    protected int getCol(View v) {
         return Integer.parseInt(((String) v.getTag()).split(",")[1]) ;
     }
 
-    protected int getY(View v) {
+    protected int getRow(View v) {
         return Integer.parseInt(((String) v.getTag()).split(",")[0]);
     }
 
     void makeCells() {
+        LayoutInflater inflater = (LayoutInflater) getApplicationContext()
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        menu = new Button[4][4];
+        GridLayout cellsMenu = (GridLayout) findViewById(R.id.MenuLayout);
+        cellsMenu.removeAllViews();
+        cellsMenu.setColumnCount(4);
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                menu[i][j] = (Button) inflater.inflate(R.layout.cell, cellsMenu, false);
+                if (i != 3 && j != 0) {
+                    menu[i][j].setText("R");
+                    OnClickListener clickListenerForReverse = new OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if (phase == "build") {
+                                direction = (direction == "hor" ? "ver" : "hor");
+                                //вставить функцию изменения
+                            }
+                            else {
+                                Stub.show(context,"Сейчас не фаза подготовки");
+                            }
+                            redraw_ship();
+                        }
+                    };
+                    menu[i][j].setOnClickListener(clickListenerForReverse);
+                }
+                menu[i][j].setTag(i + "," + j);
+                cellsMenu.addView(menu[i][j]);
+            }
+        }
+        redraw_ship();
+
         cells = new Button[HEIGHT][WIDTH];
         cellsEnemy = new Button[HEIGHT][WIDTH];
         GridLayout cellsLayout = (GridLayout) findViewById(R.id.CellsLayout);
@@ -331,8 +402,6 @@ public class CellsActivity extends Activity{
         cellsLayoutEnemy.setColumnCount(WIDTH+1);
         for (int i = -1; i < HEIGHT; i++)
             for (int j = -1; j < WIDTH; j++) {
-                LayoutInflater inflater = (LayoutInflater) getApplicationContext()
-                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 if (i == -1) {
                     indexHorizontal[j + 1] = (Button) inflater.inflate(R.layout.cell, cellsLayout, false);
                     indexHorizontal[j+1].setText(Integer.toString(j+1));
@@ -362,11 +431,13 @@ public class CellsActivity extends Activity{
                     public void onClick(View view) {
                         if (phase == "build") {
                             Stub.show(context,"inside onClick()");
+                            int tappedRow = getRow(view);
+                            int tappedCol = getCol(view);
                         }
                         else {
                             Stub.show(context,"Сейчас не фаза подготовки");
                         }
-                        // todo: Вызвать перерисовку show_field
+                        show_field();
                     }
                 };
                 //---------------------------------------------------
@@ -381,13 +452,15 @@ public class CellsActivity extends Activity{
                     public void onClick(View view) {
                         if (phase == "yourTurn") {
                             Stub.show(context,"inside onClick()");
+                            int tappedRow = getRow(view);
+                            int tappedCol = getCol(view);
                             // TODO: 01.12.2020 обработка нажатия на уже обстрелянную клетку
                         }
                         else {
                             // ?
                             Stub.show(context,"сейчас не ваш ход");
                         }
-                        // todo: Вызвать перерисовку show_field
+                        show_field();
                     }
                 };
                 // TODO: 01.12.2020 добавить обработчики для кнопки поворота, и для кнопки постановки
