@@ -173,6 +173,7 @@ public class CellsActivity extends Activity{
                 enemyField[i][col].shipSize = size;
                 cellsEnemy[i][col].setText(Integer.toString(enemyField[i][col].shipSize));
                 cellsEnemy[i][col].setBackgroundColor(Color.RED);
+                cellsEnemy[i][col].setText(Integer.toString(size));
                 //todo сделать отрисовку на поле
                 neighbours(i,col,enemyField,  cellsEnemy);
             }
@@ -181,7 +182,7 @@ public class CellsActivity extends Activity{
                 enemyField[row][i].isShip = true;
                 enemyField[row][i].shipSize = size;
                 cellsEnemy[row][i].setBackgroundColor(Color.RED);
-                cellsEnemy[row][i].setText(Integer.toString(enemyField[row][i].shipSize));
+                cellsEnemy[row][i].setText(Integer.toString(size));
                 neighbours(row, i, enemyField, cellsEnemy);
             }
         }
