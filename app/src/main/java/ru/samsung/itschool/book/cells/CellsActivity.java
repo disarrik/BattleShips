@@ -23,9 +23,10 @@ public class CellsActivity extends Activity{
     private final Context context = this;
     private int WIDTH = 10;
     private int HEIGHT = 10;
-    private int countShipPlace = 9; // 1 - 4x, 2 - 3x, 3 - 2x, 3 - 1x
+    private int countShipPlace = 10; // 1 - 4x, 2 - 3x, 3 - 2x, 4 - 1x
     private String phase; // build, yourTurn, botTurn
-    private String direction = "hor";
+    private String direction = "ver";
+    private int count_ship_for_enemy=10;
 
     private Button[][] cellsEnemy;
     private Button[][] cells;
@@ -39,24 +40,23 @@ public class CellsActivity extends Activity{
     // TODO: 01.12.2020 Интерфейс говно - надо доработатть
     // todo: Дописать методы класса
     protected class GameCell {
-        public int row; // строчка
-        public int col; // колонка
-        public boolean opened; // открыта ли ячейка
-        public boolean isFired; // стреляли
-        public boolean isShip; // стоит ли корабль
-        public boolean isNear; // стоит ли корабль рядом
-        public boolean isClickable; // можно ли нажать
-        public int shipSize; // размер корабля
+//        public int row; // строчка
+//        public int col; // колонка
+        public boolean opened=false; // открыта ли ячейка
+        public boolean isFired=false; // стреляли
+        public boolean isShip=false; // стоит ли корабль
+        public boolean isNear=false; // стоит ли корабль рядом
+        public boolean isClickable=true; // можно ли нажать
+        public int shipSize=0; // размер корабля
         public int textureNumber; // todo: текстуры?
-
-        void GameCell(int row, int col) {
-            this.row = row;
-            this.col = col;
-        }
+//        void GameCell(int row, int col) {
+//            this.row = row;
+//            this.col = col;
+//        }
     }
 
-    private GameCell[][] playerField = new GameCell[HEIGHT][WIDTH]; // поле игрока
-    private GameCell[][] enemyField = new GameCell[HEIGHT][WIDTH]; // поле противника
+    private GameCell[][] playerField;// поле игрока //todo зачем это дублируется в свойствах класса для row и col
+    private GameCell[][] enemyField;// поле противника
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +68,16 @@ public class CellsActivity extends Activity{
 
     void generate() {
         phase = "build";
+        playerField = new GameCell[HEIGHT][WIDTH];
+        enemyField = new GameCell[HEIGHT][WIDTH];
+        for (int i=0; i<HEIGHT; i++){
+            for (int j=0; j<WIDTH; j++){
+                playerField[i][j]=new GameCell();
+                enemyField[i][j]=new GameCell();
+            }
+        }
+//        create_enemy_field();
     }
-
     /*
     onCreate() -> makeCells()
     onCreate() -> generate()
@@ -108,59 +116,148 @@ public class CellsActivity extends Activity{
         * Как выделять - придумать*/
     }
 
-    void create_enemy_field() {
-        /*Создает поле противника*/
+//    void create_enemy_field() {
+//        Random random = new Random();
+//        String choose_direction_for_enemy=(random.nextInt(2)==1? "ver":"hor");
+//        int rand_row=random.nextInt(10);
+//        int rand_col=random.nextInt(10);
+//        int size_enemy_ship=0;
+//        for (int i=count_ship_for_enemy; i>0; i--){
+//            switch(i){
+//                case(10):
+//                    size_enemy_ship=4;
+//                    break;
+//                case(9):
+//                case(8):
+//                    size_enemy_ship=3;
+//                    break;
+//                case(7):
+//                case(6):
+//                case(5):
+//                    size_enemy_ship=2;
+//                    break;
+//                case(4):
+//                case(3):
+//                case(2):
+//                case(1):
+//                    size_enemy_ship=1;
+//                    break;
+//            }
+//            Stub.show(context, Integer.toString(i));
+//            while (!can_place(enemyField, rand_row, rand_col, size_enemy_ship,choose_direction_for_enemy)){
+//                choose_direction_for_enemy=(random.nextInt(2)==1? "ver":"hor");
+//                rand_row=random.nextInt(10);
+//                rand_col=random.nextInt(10);
+//            }
+//            create_ship(enemyField,rand_row,rand_col,size_enemy_ship, cellsEnemy);
+//        }
+//
+//        // рандомно выбирать вертикальное или горизонатльно направление
+//        //затем рандомно клетку до тех пока она не разрешить постановку
+//        //count_ship_for_enemy--;
+//        //вызывать neighbours;
+//    }
+    void neighbours(int row, int col, GameCell[][] field, Button[][] but_cell){//установка соседей
+        for (int i=row-1; i<=row+1; i++){
+            for (int j=col-1; j<=col+1; j++){
+                if (is_exist(i,j) && !field[i][j].isShip){
+                    field[i][j].isNear=true;
+                    but_cell[i][j].setBackgroundColor(Color.GREEN);
+                }
+            }
+        }
     }
 
-    void create_ship(GameCell[][] field, int row, int col, int size) {
-        /* Функция создаёт корабль в нужных координатах и поле
-        (row,col) - верхний левый угол корабля
-        direction: "hor", "ver" - читается из параметра
-        * работает и для игрока, и для компьютера
-        После каждой постановки корабля вы получаете свободные ячейки,
-        в какую-то из них надо попытать поставить корабль*/
+    void create_ship(int row, int col, int size) {
+        if (can_place(playerField,row,col,size,direction)){
+            if (direction.equals("ver")){
+                for (int i=row; i>row-size; i--){
+                    playerField[i][col].isShip=true;
+                    cells[i][col].setBackgroundColor(Color.RED);
+                    //todo сделать отрисовку на поле
+                    neighbours(i,col,playerField, cells);
+                }
+            } else if (direction.equals("hor")){
+                for (int i=col; i<col+size; i++){
+                    playerField[row][i].isShip=true;
+                    cells[row][i].setBackgroundColor(Color.RED);
+                    neighbours(row, i, playerField, cells);
+                }
+            }
+            countShipPlace--;
+            redraw_ship();
+        }else{
+            Stub.show(context,"Выберите другую клетку");
+        }
+        if (check_end_of_build()){
+            //todo сделать перерисовку поля
+            //todo убрать зеленые клетки, наложить текстуры
+            // todo вывести фразу
+            phase="yourTurn";
+        }
+        // todo надо перерисовать поле заново
     }
 
     boolean can_place(GameCell[][] field, int row, int col, int size, String direction) {
         /*Возращает, можно ли поставить корабль*/
-        return true;
+        if (direction.equals("ver")){
+            if (row-size<-1){
+                return false;
+            }
+            boolean check=true;
+            for (int i=row; i>row-size; i--){
+                if (playerField[i][col].isShip || playerField[i][col].isNear){
+                    check=false;
+                }
+            }
+            return check;
+        }else{
+            if (col+size>WIDTH){
+                return false;
+            }
+            boolean check=true;
+            for (int i=col; i<col+size; i++){
+                if (playerField[row][i].isShip || playerField[row][i].isNear){
+                    check=false;
+                }
+            }
+            return check;
+        }
     }
-
-    int[][] get_free_cells(GameCell[][] field) {
-        /*Возвращает индексы ячеек у которых рядом нет кораблей первая первая размерность - ячейки
-        * ячейка 1: row1, col1
-        * ячейка 2: row2, col2
-        * ...*/
-        return new int[0][0];
-    }
-
-    void close_cells_for_building(GameCell[][] field, int size, String direction) {
-        /*Закрывает для нажатия определённые кнопки при расстановке корабля с определённым и
-        размером и направлением*/
-    }
-
+//    int[][] get_free_cells(GameCell[][] field) {
+//        /*Возвращает индексы ячеек у которых рядом нет кораблей первая первая размерность - ячейки
+//        * ячейка 1: row1, col1
+//        * ячейка 2: row2, col2
+//        * ...*/
+//        return new int[0][0];
+//    }
+//
+//    void close_cells_for_building(GameCell[][] field, int size, String direction) {
+//        /*Закрывает для нажатия определённые кнопки при расстановке корабля с определённым и
+//        размером и направлением*/
+//    }
     void redraw_ship() {
         /*При повороте корабля он пропадает в поле и перерисовывается в интерфейсе*/
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 menu[i][j].setBackgroundColor(Color.WHITE);
-                if (countShipPlace < 9) {
+                if (countShipPlace < 10) {
                     if ((i == 0 && j == 0) || (i == 3 && j == 3)) continue;
                 }
-                if (countShipPlace < 7) {
+                if (countShipPlace < 8) {
                     if ((i == 1 && j == 0) || (i == 3 && j == 2)) continue;
                 }
-                if (countShipPlace < 4) {
+                if (countShipPlace < 5) {
                     if ((i == 2 && j == 0) || (i == 3 && j == 1)) continue;
                 }
                 if (countShipPlace < 1) {
                     break;
                 }
-                if (direction == "hor") {
+                if (direction.equals("ver")) {
                     if (j == 0) {
                         menu[i][j].setBackgroundColor(Color.RED);
                     }
-                } else if (direction == "ver") {
+                } else if (direction.equals("hor")) {
                     if (i == 3) {
                         menu[i][j].setBackgroundColor(Color.RED);
                     }
@@ -172,7 +269,7 @@ public class CellsActivity extends Activity{
     boolean check_end_of_build() {
         /*Вызывается после постановки каждого корабля*/
         /*После постановки последнего корабля*/
-        return true;
+        return countShipPlace == 0;
     }
 
     void player_shot(int row, int col) {
@@ -340,17 +437,7 @@ public class CellsActivity extends Activity{
             }
         }
     }
-
-    boolean is_exist(int x1, int y1) {
-        // Проверяет ячейку на существование
-        return (x1 >= 0 && x1 <= 9 && y1 >= 0 && y1 <= 9);
-    }
-
-    boolean is_near(int x1, int y1, int x2, int y2) {
-        // Проверяет ячейку на нахождение рядом по вертикали или горизонтали
-        return ((x1 == x2 && y1 != y2) || (x1 != x2 && y1 == y2));
-    }
-
+    /**Конец бота*/
     protected int getCol(View v) {
         return Integer.parseInt(((String) v.getTag()).split(",")[1]) ;
     }
@@ -376,6 +463,7 @@ public class CellsActivity extends Activity{
                         public void onClick(View view) {
                             if (phase == "build") {
                                 direction = (direction == "hor" ? "ver" : "hor");
+
                                 //вставить функцию изменения
                             }
                             else {
@@ -430,9 +518,31 @@ public class CellsActivity extends Activity{
                     @Override
                     public void onClick(View view) {
                         if (phase == "build") {
-                            Stub.show(context,"inside onClick()");
+                            Stub.show(context,direction);
                             int tappedRow = getRow(view);
                             int tappedCol = getCol(view);
+                            int size_ship=0;
+                            switch(countShipPlace){
+                                case(10):
+                                    size_ship=4;
+                                    break;
+                                case(9):
+                                case(8):
+                                    size_ship=3;
+                                    break;
+                                case(7):
+                                case(6):
+                                case(5):
+                                    size_ship=2;
+                                    break;
+                                case(4):
+                                case(3):
+                                case(2):
+                                case(1):
+                                    size_ship=1;
+                                    break;
+                            }
+                            create_ship(tappedRow,tappedCol,size_ship);
                         }
                         else {
                             Stub.show(context,"Сейчас не фаза подготовки");
