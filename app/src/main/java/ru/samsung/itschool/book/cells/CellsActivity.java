@@ -46,7 +46,7 @@ public class CellsActivity extends Activity{
         public boolean isFired=false; // стреляли
         public boolean isShip=false; // стоит ли корабль
         public boolean isNear=false; // стоит ли корабль рядом
-        public boolean isClickable=true; // можно ли нажать
+        //public boolean isClickable=true; // можно ли нажать
         public int shipSize=0; // размер корабля
         public int textureNumber; // todo: текстуры?
 //        void GameCell(int row, int col) {
@@ -143,7 +143,6 @@ public class CellsActivity extends Activity{
                     size_enemy_ship=1;
                     break;
             }
-            Stub.show(context, Integer.toString(i));
             while (!can_place(enemyField, rand_row, rand_col, size_enemy_ship,choose_direction_for_enemy)){
                 choose_direction_for_enemy=(random.nextInt(2)==1? "ver":"hor");
                 rand_row=random.nextInt(10);
@@ -171,6 +170,8 @@ public class CellsActivity extends Activity{
         if (direction_enemy_ship.equals("ver")){
             for (int i=row; i>row-size; i--){
                 enemyField[i][col].isShip=true;
+                enemyField[i][col].shipSize = size;
+                cellsEnemy[i][col].setText(Integer.toString(enemyField[i][col].shipSize));
                 cellsEnemy[i][col].setBackgroundColor(Color.RED);
                 //todo сделать отрисовку на поле
                 neighbours(i,col,enemyField,  cellsEnemy);
@@ -178,7 +179,9 @@ public class CellsActivity extends Activity{
         } else if (direction_enemy_ship.equals("hor")) {
             for (int i = col; i < col + size; i++) {
                 enemyField[row][i].isShip = true;
+                enemyField[row][i].shipSize = size;
                 cellsEnemy[row][i].setBackgroundColor(Color.RED);
+                cellsEnemy[row][i].setText(Integer.toString(enemyField[row][i].shipSize));
                 neighbours(row, i, enemyField, cellsEnemy);
             }
         }
@@ -188,6 +191,7 @@ public class CellsActivity extends Activity{
             if (direction.equals("ver")){
                 for (int i=row; i>row-size; i--){
                     playerField[i][col].isShip=true;
+                    playerField[i][col].shipSize = size;
                     cells[i][col].setBackgroundColor(Color.RED);
                     //todo сделать отрисовку на поле
                     neighbours(i,col,playerField, cells);
@@ -195,6 +199,7 @@ public class CellsActivity extends Activity{
             } else if (direction.equals("hor")){
                 for (int i=col; i<col+size; i++){
                     playerField[row][i].isShip=true;
+                    playerField[row][i].shipSize = size;
                     cells[row][i].setBackgroundColor(Color.RED);
                     neighbours(row, i, playerField, cells);
                 }
@@ -209,6 +214,7 @@ public class CellsActivity extends Activity{
             //todo убрать зеленые клетки, наложить текстуры
             // todo вывести фразу
             phase="yourTurn";
+            Stub.show(context, "Редим игры переключен");
         }
         // todo надо перерисовать поле заново
     }
@@ -288,9 +294,37 @@ public class CellsActivity extends Activity{
     }
 
     void player_shot(int row, int col) {
+        if (!enemyField[row][col].isFired) {
+            if (enemyField[row][col].isShip) {
+                enemyField[row][col].isFired = true;
+                enemyField[row][col].opened = true;
+                cellsEnemy[row][col].setBackgroundColor(Color.BLACK);
+                rewrite_size_ship(enemyField, row, col);
+                if (enemyField[row][col].shipSize == 0) Stub.show(context, "корабль потоплен");
+                // todo сделать проверку на потопление или подьитие
+            }
+            else {
+                enemyField[row][col].isFired = true;
+                enemyField[row][col].opened = true;
+                phase = "botTurn";
+                cellsEnemy[row][col].setBackgroundColor(Color.GRAY);
+                enemy_shot();
+            }
+        }
+
         /*Обработка выстрела игрока по полю противника
         * Информационное составляющее поля противника должно быть изменено
         * При попадании не менять ход*/
+    }
+
+    void rewrite_size_ship(GameCell[][] field, int row, int col) {
+        if (field[row][col].isShip) {
+            field[row][col].shipSize--;
+            if (is_exist(row-1, col) && field[row-1][col].shipSize > field[row][col].shipSize) rewrite_size_ship(field, row - 1, col);
+            if (is_exist(row, col + 1) && field[row][col+1].shipSize > field[row][col].shipSize) rewrite_size_ship(field, row, col +1);
+            if (is_exist(row+1, col) && field[row+1][col].shipSize > field[row][col].shipSize) rewrite_size_ship(field, row + 1, col);
+            if (is_exist(row, col - 1) && field[row][col-1].shipSize > field[row][col].shipSize) rewrite_size_ship(field, row , col -1);
+        }
     }
 
     void check_win() {
@@ -532,8 +566,7 @@ public class CellsActivity extends Activity{
                 OnClickListener clickListenerForPlacing = new OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (phase == "build") {
-                            Stub.show(context,direction);
+                        if (phase.equals("build")) {
                             int tappedRow = getRow(view);
                             int tappedCol = getCol(view);
                             int size_ship=0;
@@ -575,10 +608,11 @@ public class CellsActivity extends Activity{
                 OnClickListener clickListenerForYourTurn = new OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (phase == "yourTurn") {
-                            Stub.show(context,"inside onClick()");
+                        if (phase.equals("yourTurn")) {
+                            //Stub.show(context,"inside onClick()");
                             int tappedRow = getRow(view);
                             int tappedCol = getCol(view);
+                            player_shot(tappedRow, tappedCol);
                             // TODO: 01.12.2020 обработка нажатия на уже обстрелянную клетку
                         }
                         else {
