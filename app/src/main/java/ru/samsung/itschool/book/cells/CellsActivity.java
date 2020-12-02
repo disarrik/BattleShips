@@ -203,11 +203,11 @@ public class CellsActivity extends Activity{
         return ((x1 == x2 && y1 != y2) || (x1 != x2 && y1 == y2));
     }
 
-    protected int getX(View v) {
+    protected int getCol(View v) {
         return Integer.parseInt(((String) v.getTag()).split(",")[1]) ;
     }
 
-    protected int getY(View v) {
+    protected int getRow(View v) {
         return Integer.parseInt(((String) v.getTag()).split(",")[0]);
     }
 
@@ -283,6 +283,8 @@ public class CellsActivity extends Activity{
                     public void onClick(View view) {
                         if (phase == "build") {
                             Stub.show(context,"inside onClick()");
+                            int tappedRow = getRow(view);
+                            int tappedCol = getCol(view);
                         }
                         else {
                             Stub.show(context,"Сейчас не фаза подготовки");
@@ -302,6 +304,8 @@ public class CellsActivity extends Activity{
                     public void onClick(View view) {
                         if (phase == "yourTurn") {
                             Stub.show(context,"inside onClick()");
+                            int tappedRow = getRow(view);
+                            int tappedCol = getCol(view);
                             // TODO: 01.12.2020 обработка нажатия на уже обстрелянную клетку
                         }
                         else {
