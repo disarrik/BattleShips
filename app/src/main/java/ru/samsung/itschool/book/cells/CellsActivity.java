@@ -26,6 +26,9 @@ public class CellsActivity extends Activity{
     private String phase; // build, yourTurn, botTurn
     private String direction = "ver";
     private int count_ship_for_enemy=10;
+    private long frame = 0;
+    private long enemyStartFrame = -61;
+    private long enemyFramePeriod = 60;
 
     private Button[][] cellsEnemy;
     private Button[][] cells;
@@ -63,6 +66,8 @@ public class CellsActivity extends Activity{
         setContentView(R.layout.cells);
         makeCells();
         generate();
+        MyTimer timer = new MyTimer();
+        timer.start();
     }
 
     void generate() {
@@ -294,7 +299,8 @@ public class CellsActivity extends Activity{
                 enemyField[row][col].opened = true;
                 phase = "botTurn";
                 cellsEnemy[row][col].setBackgroundColor(Color.GRAY);
-                enemy_shot();
+                enemyStartFrame = frame;
+                // enemy_shot();
             }
         }
 
@@ -452,7 +458,7 @@ public class CellsActivity extends Activity{
 
         playerField[temp_turn_i][temp_turn_j].isFired = true;
         mas_for_choose_tap[rand_choose] = -1;
-        sum_pretend--;
+        //sum_pretend--;
         cells[temp_turn_i][temp_turn_j].setBackgroundColor(Color.GRAY);
         if (playerField[temp_turn_i][temp_turn_j].isShip) {
             cells[temp_turn_i][temp_turn_j].setBackgroundColor(Color.BLACK);
@@ -462,15 +468,16 @@ public class CellsActivity extends Activity{
             if (sum_hit == playerField[temp_turn_i][temp_turn_j].shipSize) {
                 reset_neighbours(sum_hit); //функция, которая делает всех соседей обстрелянными
                 hit = false;
-                enemy_shot();
+                //enemy_shot();
                 //todo анимация потопления корабля
             } else {
                 if (sum_hit == 2)
                     delete_pretend();
                 add_and_verify_pretend();
-                enemy_shot();
+                //enemy_shot();
                 //todo отрисовка анимации попадания
             }
+            enemyStartFrame = frame;
 
         } else {
             phase = "yourTurn";
@@ -524,7 +531,8 @@ public class CellsActivity extends Activity{
                         reset_mas();
                         first_hit_choose_pretend();
                     }
-                    enemy_shot();
+                    enemyStartFrame = frame;
+                    // enemy_shot();
                 }
                 else{
                     phase = "yourTurn";
@@ -675,15 +683,25 @@ public class CellsActivity extends Activity{
                 cellsLayoutEnemy.addView(cellsEnemy[i][j]);
             }
     }
+
+    void update() {
+        frame++;
+        if (frame == enemyStartFrame + enemyFramePeriod) {
+            enemy_shot();
+            //Stub.show(context, Long.toString(frame));
+        }
+    }
+
     class MyTimer extends CountDownTimer
     {
         MyTimer()
         {
-            super(100000, 100);
+            super(100000, 20);
         }
         @Override
         public void onTick(long millisUntilFinished) {
             // TODO: 01.12.2020 Анимация хода противника делать в последнюю очередь
+            update();
         }
         @Override
         public void onFinish() {
