@@ -3,6 +3,7 @@ package ru.samsung.itschool.book.cells;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import android.os.CountDownTimer;
@@ -14,6 +15,7 @@ import android.widget.Button;
 import android.widget.GridLayout;
 
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import task.Stub;
 import task.Task;
@@ -35,26 +37,19 @@ public class CellsActivity extends Activity{
     private Button[] indexVerticalEnemy = new Button[11];
     private Button[][] menu;
 
-    // todo: Создать кнопку для поворота кораблей при расстановке
+    // todo: разобраться с кнопкой
     // TODO: 01.12.2020 Интерфейс говно - надо доработатть
-    // todo: Дописать методы класса
     protected class GameCell {
-//        public int row; // строчка
-//        public int col; // колонка
-        public boolean opened=false; // открыта ли ячейка
-        public boolean isFired=false; // стреляли
-        public boolean isShip=false; // стоит ли корабль
-        public boolean isNear=false; // стоит ли корабль рядом
+        public boolean opened = false; // открыта ли ячейка
+        public boolean isFired = false; // стреляли
+        public boolean isShip = false; // стоит ли корабль
+        public boolean isNear = false; // стоит ли корабль рядом
         //public boolean isClickable=true; // можно ли нажать
-        public int shipSize=0; // размер корабля
+        public int shipSize = 0; // размер корабля
         public int textureNumber; // todo: текстуры?
-//        void GameCell(int row, int col) {
-//            this.row = row;
-//            this.col = col;
-//        }
     }
 
-    private GameCell[][] playerField;// поле игрока //todo зачем это дублируется в свойствах класса для row и col
+    private GameCell[][] playerField;// поле игрока
     private GameCell[][] enemyField;// поле противника
 
     @Override
@@ -178,13 +173,17 @@ public class CellsActivity extends Activity{
             }
         }
     }
+
     void create_ship(int row, int col, int size) {
         if (can_place(playerField,row,col,size,direction)){
             if (direction.equals("ver")){
                 for (int i=row; i>row-size; i--){
                     playerField[i][col].isShip=true;
                     playerField[i][col].shipSize = size;
-                    cells[i][col].setBackgroundColor(Color.RED);
+                    if (size > 1 && i == row - size + 1)  cells[i][col].setBackgroundResource(R.drawable.ship_nose_vertical);
+                    if (size >= 1 && (i > row - size + 1 && i < row)) cells[i][col].setBackgroundResource(R.drawable.ship_center_vertical);
+                    if (size > 1 && i == row)  cells[i][col].setBackgroundResource(R.drawable.ship_back_vertical);
+                    if (size == 1) cells[i][col].setBackgroundResource(R.drawable.ship_center_vertical);
                     //todo сделать отрисовку на поле
                     neighbours(i,col,playerField, cells);
                 }
@@ -192,7 +191,10 @@ public class CellsActivity extends Activity{
                 for (int i=col; i<col+size; i++){
                     playerField[row][i].isShip=true;
                     playerField[row][i].shipSize = size;
-                    cells[row][i].setBackgroundColor(Color.RED);
+                    if (size > 1 && i == col + size - 1)  cells[row][i].setBackgroundResource(R.drawable.ship_nose_horizontal);
+                    if (size >= 1 && (i < col + size - 1 && i > col)) cells[row][i].setBackgroundResource(R.drawable.ship_center_horizontal);
+                    if (size > 1 && i == col)  cells[row][i].setBackgroundResource(R.drawable.ship_back_horizontal);
+                    if (size == 1) cells[row][i].setBackgroundResource(R.drawable.ship_center_horizontal);
                     neighbours(row, i, playerField, cells);
                 }
             }
@@ -202,13 +204,13 @@ public class CellsActivity extends Activity{
             Stub.show(context,"Выберите другую клетку");
         }
         if (check_end_of_build()){
-            //todo сделать перерисовку поля
             //todo наложить текстуры
             // todo вывести фразу
             for (int i=0; i<HEIGHT; i++){
                 for (int j=0; j<WIDTH; j++){
-                    if (playerField[i][j].isNear && !playerField[i][j].isShip)
-                        cells[i][j].setBackgroundColor(Color.WHITE);
+                    if (playerField[i][j].isNear && !playerField[i][j].isShip) {
+                        cells[i][j].setBackgroundColor(0xFF2196F3);
+                    }
                 }
             }
             phase="yourTurn";
@@ -287,7 +289,6 @@ public class CellsActivity extends Activity{
                 cellsEnemy[row][col].setBackgroundColor(Color.BLACK);
                 rewrite_size_ship(enemyField, row, col);
                 if (enemyField[row][col].shipSize == 0) Stub.show(context, "корабль потоплен");
-                // todo сделать проверку на потопление или подьитие
             }
             else {
                 enemyField[row][col].isFired = true;
@@ -587,23 +588,23 @@ public class CellsActivity extends Activity{
             for (int j = -1; j < WIDTH; j++) {
                 if (i == -1) {
                     indexHorizontal[j + 1] = (Button) inflater.inflate(R.layout.cell, cellsLayout, false);
-                    indexHorizontal[j+1].setText(Integer.toString(j+1));
                     indexHorizontal[j+1].setTag(i + "," + j);
+                    indexHorizontal[j+1].setBackgroundColor(Color.WHITE);
                     cellsLayout.addView(indexHorizontal[j + 1]);
                     indexHorizontalEnemy[j + 1] = (Button) inflater.inflate(R.layout.cell, cellsLayout, false);
-                    indexHorizontalEnemy[j+1].setText(Integer.toString(j+1));
                     indexHorizontalEnemy[j+1].setTag(i + "," + j);
+                    indexHorizontalEnemy[j+1].setBackgroundColor(Color.WHITE);
                     cellsLayoutEnemy.addView(indexHorizontalEnemy[j + 1]);
                     continue;
                 }
                 if (j == -1 && i > -1) {
                     indexVertical[i + 1] = (Button) inflater.inflate(R.layout.cell, cellsLayout, false);
-                    indexVertical[i+1].setText(Integer.toString(i+1));
                     indexVertical[i+1].setTag(i + "," + j);
+                    indexVertical[i+1].setBackgroundColor(Color.WHITE);
                     cellsLayout.addView(indexVertical[i + 1]);
                     indexVerticalEnemy[i + 1] = (Button) inflater.inflate(R.layout.cell, cellsLayout, false);
-                    indexVerticalEnemy[i+1].setText(Integer.toString(i+1));
                     indexVerticalEnemy[i+1].setTag(i + "," + j);
+                    indexVerticalEnemy[i+1].setBackgroundColor(Color.WHITE);
                     cellsLayoutEnemy.addView(indexVerticalEnemy[i + 1]);
                     continue;
                 }
@@ -674,6 +675,50 @@ public class CellsActivity extends Activity{
                 cellsEnemy[i][j].setTag(i + "," + j);
                 cellsLayoutEnemy.addView(cellsEnemy[i][j]);
             }
+
+        indexHorizontal[1].setBackgroundResource(R.drawable.playera);
+        indexHorizontal[2].setBackgroundResource(R.drawable.playerb);
+        indexHorizontal[3].setBackgroundResource(R.drawable.playerc);
+        indexHorizontal[4].setBackgroundResource(R.drawable.playerd);
+        indexHorizontal[5].setBackgroundResource(R.drawable.playere);
+        indexHorizontal[6].setBackgroundResource(R.drawable.playerf);
+        indexHorizontal[7].setBackgroundResource(R.drawable.playerg);
+        indexHorizontal[8].setBackgroundResource(R.drawable.playerh);
+        indexHorizontal[9].setBackgroundResource(R.drawable.playeri);
+        indexHorizontal[10].setBackgroundResource(R.drawable.playerj);
+
+        indexVertical[1].setBackgroundResource(R.drawable.player1);
+        indexVertical[2].setBackgroundResource(R.drawable.player2);
+        indexVertical[3].setBackgroundResource(R.drawable.player3);
+        indexVertical[4].setBackgroundResource(R.drawable.player4);
+        indexVertical[5].setBackgroundResource(R.drawable.player5);
+        indexVertical[6].setBackgroundResource(R.drawable.player6);
+        indexVertical[7].setBackgroundResource(R.drawable.player7);
+        indexVertical[8].setBackgroundResource(R.drawable.player8);
+        indexVertical[9].setBackgroundResource(R.drawable.player9);
+        indexVertical[10].setBackgroundResource(R.drawable.player10);
+
+        indexHorizontalEnemy[1].setBackgroundResource(R.drawable.enemya);
+        indexHorizontalEnemy[2].setBackgroundResource(R.drawable.enemyb);
+        indexHorizontalEnemy[3].setBackgroundResource(R.drawable.enemyc);
+        indexHorizontalEnemy[4].setBackgroundResource(R.drawable.enemyd);
+        indexHorizontalEnemy[5].setBackgroundResource(R.drawable.enemye);
+        indexHorizontalEnemy[6].setBackgroundResource(R.drawable.enemyf);
+        indexHorizontalEnemy[7].setBackgroundResource(R.drawable.enemyg);
+        indexHorizontalEnemy[8].setBackgroundResource(R.drawable.enemyh);
+        indexHorizontalEnemy[9].setBackgroundResource(R.drawable.enemyi);
+        indexHorizontalEnemy[10].setBackgroundResource(R.drawable.enemyj);
+
+        indexVerticalEnemy[1].setBackgroundResource(R.drawable.enemy1);
+        indexVerticalEnemy[2].setBackgroundResource(R.drawable.enemy2);
+        indexVerticalEnemy[3].setBackgroundResource(R.drawable.enemy3);
+        indexVerticalEnemy[4].setBackgroundResource(R.drawable.enemy4);
+        indexVerticalEnemy[5].setBackgroundResource(R.drawable.enemy5);
+        indexVerticalEnemy[6].setBackgroundResource(R.drawable.enemy6);
+        indexVerticalEnemy[7].setBackgroundResource(R.drawable.enemy7);
+        indexVerticalEnemy[8].setBackgroundResource(R.drawable.enemy8);
+        indexVerticalEnemy[9].setBackgroundResource(R.drawable.enemy9);
+        indexVerticalEnemy[10].setBackgroundResource(R.drawable.enemy10);
     }
     class MyTimer extends CountDownTimer
     {

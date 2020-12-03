@@ -1,4 +1,4 @@
-#Thu Dec 03 11:50:15 MSK 2020
-base.0=C\:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\out\\classes.dex
+#Thu Dec 03 16:27:30 MSK 2020
+base.0=C\:\\Users\\disar\\samsung\\Android\\github\\BattleShips\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex
