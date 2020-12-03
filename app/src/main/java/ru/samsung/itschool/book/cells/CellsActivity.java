@@ -29,6 +29,8 @@ public class CellsActivity extends Activity{
     private long frame = 0;
     private long enemyStartFrame = -61;
     private long enemyFramePeriod = 30;
+    private int playerShips = 10;
+    private int enemyShips = 10;
 
     private Button[][] cellsEnemy;
     private Button[][] cells;
@@ -68,6 +70,8 @@ public class CellsActivity extends Activity{
         generate();
         MyTimer timer = new MyTimer();
         timer.start();
+        playerShips = 10;
+        enemyShips = 10;
     }
 
     void generate() {
@@ -291,8 +295,10 @@ public class CellsActivity extends Activity{
                 enemyField[row][col].opened = true;
                 cellsEnemy[row][col].setBackgroundColor(Color.BLACK);
                 rewrite_size_ship(enemyField, row, col);
-                if (enemyField[row][col].shipSize == 0)
+                if (enemyField[row][col].shipSize == 0) {
                     Stub.show(context, "корабль потоплен");
+                    enemyShips--;
+                }
                 // todo сделать проверку на потопление или подьитие
             }
             else {
@@ -302,6 +308,7 @@ public class CellsActivity extends Activity{
                 cellsEnemy[row][col].setBackgroundColor(Color.GRAY);
                 enemyStartFrame = frame;
             }
+            check_win(enemyField);
         }
 
         /*Обработка выстрела игрока по полю противника
@@ -318,8 +325,17 @@ public class CellsActivity extends Activity{
             if (is_exist(row, col - 1) && field[row][col-1].shipSize > field[row][col].shipSize) rewrite_size_ship(field, row , col -1);
         }
     }
-    void check_win() {
+    void check_win(GameCell[][] field) {
         /*Проверяется выигрыш одного из игроков*/
+        if (enemyShips == 0) {
+            Stub.show(context, "Вы выиграли");
+            phase = "end";
+        }
+        else if (playerShips == 0) {
+            Stub.show(context, "Вы проиграли");
+            phase = "end";
+        }
+
     }
     /** Начало бота*/
     void reset_n_1(int temp_i, int temp_j){
@@ -468,6 +484,7 @@ public class CellsActivity extends Activity{
             if (sum_hit == playerField[temp_turn_i][temp_turn_j].shipSize) {
                 reset_neighbours(sum_hit); //функция, которая делает всех соседей обстрелянными
                 hit = false;
+                playerShips--;
                 //todo анимация потопления корабля
             } else {
                 if (sum_hit == 2)
@@ -501,6 +518,7 @@ public class CellsActivity extends Activity{
     }
     void enemy_shot() {
         //todo задержка?
+        check_win(playerField);
         if (hit) {
             choose_cell_for_shoot();
         } else{
@@ -520,7 +538,8 @@ public class CellsActivity extends Activity{
                     if (playerField[temp_turn_i][temp_turn_j].shipSize == 1){
                         reset_n_1(temp_turn_i, temp_turn_j);
                         hit=false;
-                    }else{
+                        playerShips--;
+                    } else {
                         hit=true;
                         turn_i=temp_turn_i;
                         turn_j=temp_turn_j;
@@ -538,6 +557,8 @@ public class CellsActivity extends Activity{
         }
     }
     /**Конец бота*/
+
+
     protected int getCol(View v) {
         return Integer.parseInt(((String) v.getTag()).split(",")[1]) ;
     }

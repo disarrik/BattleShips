@@ -4,8 +4,16 @@
         "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\ship_center.png"
     },
     {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_rotate_button_33.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\rotate_button_33.png"
+    },
+    {
         "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_launcher.png.flat",
         "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\ic_launcher.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_rotate_button_13.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\rotate_button_13.png"
     },
     {
         "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ship_nose.png.flat",
@@ -16,11 +24,47 @@
         "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\ship_back.png"
     },
     {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_rotate_button_21.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\rotate_button_21.png"
+    },
+    {
         "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\layout_cell.xml.flat",
         "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\layout\\cell.xml"
     },
     {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_rotate_button_22.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\rotate_button_22.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_rotate_button_11.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\rotate_button_11.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_rotate_button_23.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\rotate_button_23.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_sea_1.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\sea_1.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_rotate_button_31.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\rotate_button_31.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_rotate_button.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\rotate_button.png"
+    },
+    {
         "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\layout_cells.xml.flat",
         "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\layout\\cells.xml"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_rotate_button_32.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\rotate_button_32.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_rotate_button_12.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\rotate_button_12.png"
     }
 ]

@@ -10,9 +10,20 @@ package ru.samsung.itschool.book.cells;
 public final class R {
   public static final class drawable {
     public static final int ic_launcher=0x7f010000;
-    public static final int ship_back=0x7f010001;
-    public static final int ship_center=0x7f010002;
-    public static final int ship_nose=0x7f010003;
+    public static final int rotate_button=0x7f010001;
+    public static final int rotate_button_11=0x7f010002;
+    public static final int rotate_button_12=0x7f010003;
+    public static final int rotate_button_13=0x7f010004;
+    public static final int rotate_button_21=0x7f010005;
+    public static final int rotate_button_22=0x7f010006;
+    public static final int rotate_button_23=0x7f010007;
+    public static final int rotate_button_31=0x7f010008;
+    public static final int rotate_button_32=0x7f010009;
+    public static final int rotate_button_33=0x7f01000a;
+    public static final int sea_1=0x7f01000b;
+    public static final int ship_back=0x7f01000c;
+    public static final int ship_center=0x7f01000d;
+    public static final int ship_nose=0x7f01000e;
   }
   public static final class id {
     public static final int CellsLayout=0x7f020000;
