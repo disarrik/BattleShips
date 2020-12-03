@@ -4,11 +4,23 @@
         "source": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\src\\main\\res\\layout\\cell.xml"
     },
     {
+        "merged": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ship_nose.png.flat",
+        "source": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\src\\main\\res\\drawable\\ship_nose.png"
+    },
+    {
         "merged": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\layout_cells.xml.flat",
         "source": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\src\\main\\res\\layout\\cells.xml"
     },
     {
+        "merged": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ship_center.png.flat",
+        "source": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\src\\main\\res\\drawable\\ship_center.png"
+    },
+    {
         "merged": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_launcher.png.flat",
         "source": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\src\\main\\res\\drawable\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ship_back.png.flat",
+        "source": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\src\\main\\res\\drawable\\ship_back.png"
     }
 ]

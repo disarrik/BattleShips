@@ -1,4 +1,7 @@
 int drawable ic_launcher 0x7f010000
+int drawable ship_back 0x7f010001
+int drawable ship_center 0x7f010002
+int drawable ship_nose 0x7f010003
 int id CellsLayout 0x7f020000
 int id CellsLayoutEnemy 0x7f020001
 int id MenuLayout 0x7f020002
