@@ -1,42 +1,54 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
+            "outputFile": "C:\\Users\\disar\\samsung\\Android\\github\\BattleShips\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
             "map": [
                 {
-                    "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\values\\styles.xml",
+                    "source": "C:\\Users\\disar\\samsung\\Android\\github\\BattleShips\\app\\src\\main\\res\\values\\colors.xml",
                     "from": {
-                        "startLines": "6,15",
-                        "startColumns": "4,4",
-                        "startOffsets": "192,525",
-                        "endLines": "12,17",
-                        "endColumns": "12,12",
-                        "endOffsets": "484,682"
+                        "startLines": "-1,3",
+                        "startColumns": "-1,4",
+                        "startOffsets": "-1,96",
+                        "endColumns": "-1,39",
+                        "endOffsets": "-1,131"
                     },
                     "to": {
-                        "startLines": "3,10",
+                        "startLines": "2,3",
                         "startColumns": "4,4",
-                        "startOffsets": "98,389",
-                        "endLines": "9,12",
-                        "endColumns": "12,12",
-                        "endOffsets": "384,544"
+                        "startOffsets": "55,93",
+                        "endColumns": "37,39",
+                        "endOffsets": "88,128"
                     }
                 },
                 {
-                    "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\values\\strings.xml",
+                    "source": "C:\\Users\\disar\\samsung\\Android\\github\\BattleShips\\app\\src\\main\\res\\values\\strings.xml",
                     "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "57",
-                        "endColumns": "42",
-                        "endOffsets": "95"
+                        "startLines": "-1",
+                        "startColumns": "-1",
+                        "startOffsets": "-1"
                     },
                     "to": {
-                        "startLines": "2",
+                        "startLines": "4",
                         "startColumns": "4",
-                        "startOffsets": "55",
+                        "startOffsets": "133",
                         "endColumns": "42",
-                        "endOffsets": "93"
+                        "endOffsets": "171"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\disar\\samsung\\Android\\github\\BattleShips\\app\\src\\main\\res\\values\\styles.xml",
+                    "from": {
+                        "startLines": "-1,-1",
+                        "startColumns": "-1,-1",
+                        "startOffsets": "-1,-1"
+                    },
+                    "to": {
+                        "startLines": "5,8",
+                        "startColumns": "4,4",
+                        "startOffsets": "176,259",
+                        "endLines": "7,10",
+                        "endColumns": "12,12",
+                        "endOffsets": "254,326"
                     }
                 }
             ]

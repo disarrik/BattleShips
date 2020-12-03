@@ -3,40 +3,40 @@
 3    package="ru.samsung.itschool.book.cells" >
 4
 5    <uses-sdk
-6        android:minSdkVersion="23"
-6-->D:\PenzaStreetCompany\Android\BattleShips\app\src\main\AndroidManifest.xml
+6        android:minSdkVersion="14"
+6-->C:\Users\disar\samsung\Android\github\BattleShips\app\src\main\AndroidManifest.xml
 7        android:targetSdkVersion="29" />
-7-->D:\PenzaStreetCompany\Android\BattleShips\app\src\main\AndroidManifest.xml
+7-->C:\Users\disar\samsung\Android\github\BattleShips\app\src\main\AndroidManifest.xml
 8
 9    <application
-9-->D:\PenzaStreetCompany\Android\BattleShips\app\src\main\AndroidManifest.xml:7:5-23:19
+9-->C:\Users\disar\samsung\Android\github\BattleShips\app\src\main\AndroidManifest.xml:7:5-23:19
 10        android:allowBackup="true"
-10-->D:\PenzaStreetCompany\Android\BattleShips\app\src\main\AndroidManifest.xml:8:9-35
+10-->C:\Users\disar\samsung\Android\github\BattleShips\app\src\main\AndroidManifest.xml:8:9-35
 11        android:debuggable="true"
 12        android:icon="@drawable/ic_launcher"
-12-->D:\PenzaStreetCompany\Android\BattleShips\app\src\main\AndroidManifest.xml:9:9-45
+12-->C:\Users\disar\samsung\Android\github\BattleShips\app\src\main\AndroidManifest.xml:9:9-45
 13        android:label="@string/app_name"
-13-->D:\PenzaStreetCompany\Android\BattleShips\app\src\main\AndroidManifest.xml:10:9-41
+13-->C:\Users\disar\samsung\Android\github\BattleShips\app\src\main\AndroidManifest.xml:10:9-41
 14        android:testOnly="true"
 15        android:theme="@style/AppTheme" >
-15-->D:\PenzaStreetCompany\Android\BattleShips\app\src\main\AndroidManifest.xml:11:9-40
+15-->C:\Users\disar\samsung\Android\github\BattleShips\app\src\main\AndroidManifest.xml:11:9-40
 16        <activity
-16-->D:\PenzaStreetCompany\Android\BattleShips\app\src\main\AndroidManifest.xml:12:9-22:20
+16-->C:\Users\disar\samsung\Android\github\BattleShips\app\src\main\AndroidManifest.xml:12:9-22:20
 17            android:name="ru.samsung.itschool.book.cells.CellsActivity"
-17-->D:\PenzaStreetCompany\Android\BattleShips\app\src\main\AndroidManifest.xml:13:13-42
+17-->C:\Users\disar\samsung\Android\github\BattleShips\app\src\main\AndroidManifest.xml:13:13-42
 18            android:label="@string/app_name"
-18-->D:\PenzaStreetCompany\Android\BattleShips\app\src\main\AndroidManifest.xml:14:13-45
+18-->C:\Users\disar\samsung\Android\github\BattleShips\app\src\main\AndroidManifest.xml:14:13-45
 19            android:screenOrientation="portrait" >
-19-->D:\PenzaStreetCompany\Android\BattleShips\app\src\main\AndroidManifest.xml:15:13-49
+19-->C:\Users\disar\samsung\Android\github\BattleShips\app\src\main\AndroidManifest.xml:15:13-49
 20            <intent-filter>
-20-->D:\PenzaStreetCompany\Android\BattleShips\app\src\main\AndroidManifest.xml:17:13-21:29
+20-->C:\Users\disar\samsung\Android\github\BattleShips\app\src\main\AndroidManifest.xml:17:13-21:29
 21                <action android:name="android.intent.action.MAIN" />
-21-->D:\PenzaStreetCompany\Android\BattleShips\app\src\main\AndroidManifest.xml:18:17-69
-21-->D:\PenzaStreetCompany\Android\BattleShips\app\src\main\AndroidManifest.xml:18:25-66
+21-->C:\Users\disar\samsung\Android\github\BattleShips\app\src\main\AndroidManifest.xml:18:17-69
+21-->C:\Users\disar\samsung\Android\github\BattleShips\app\src\main\AndroidManifest.xml:18:25-66
 22
 23                <category android:name="android.intent.category.LAUNCHER" />
-23-->D:\PenzaStreetCompany\Android\BattleShips\app\src\main\AndroidManifest.xml:20:17-77
-23-->D:\PenzaStreetCompany\Android\BattleShips\app\src\main\AndroidManifest.xml:20:27-74
+23-->C:\Users\disar\samsung\Android\github\BattleShips\app\src\main\AndroidManifest.xml:20:17-77
+23-->C:\Users\disar\samsung\Android\github\BattleShips\app\src\main\AndroidManifest.xml:20:27-74
 24            </intent-filter>
 25        </activity>
 26    </application>

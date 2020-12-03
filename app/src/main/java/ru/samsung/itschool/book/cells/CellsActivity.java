@@ -1,8 +1,11 @@
 package ru.samsung.itschool.book.cells;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 
 import android.os.CountDownTimer;
@@ -14,6 +17,7 @@ import android.widget.Button;
 import android.widget.GridLayout;
 
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import task.Stub;
 import task.Task;
@@ -40,26 +44,20 @@ public class CellsActivity extends Activity{
     private Button[] indexVerticalEnemy = new Button[11];
     private Button[][] menu;
 
-    // todo: Создать кнопку для поворота кораблей при расстановке
+    // todo: разобраться с кнопкой
     // TODO: 01.12.2020 Интерфейс говно - надо доработатть
-    // todo: Дописать методы класса
     protected class GameCell {
-//        public int row; // строчка
-//        public int col; // колонка
-        public boolean opened=false; // открыта ли ячейка
-        public boolean isFired=false; // стреляли
-        public boolean isShip=false; // стоит ли корабль
-        public boolean isNear=false; // стоит ли корабль рядом
+        public boolean opened = false; // открыта ли ячейка
+        public boolean isShown = false;
+        public boolean isFired = false; // стреляли
+        public boolean isShip = false; // стоит ли корабль
+        public boolean isNear = false; // стоит ли корабль рядом
         //public boolean isClickable=true; // можно ли нажать
-        public int shipSize=0; // размер корабля
+        public int shipSize = 0; // размер корабля
         public int textureNumber; // todo: текстуры?
-//        void GameCell(int row, int col) {
-//            this.row = row;
-//            this.col = col;
-//        }
     }
 
-    private GameCell[][] playerField;// поле игрока //todo зачем это дублируется в свойствах класса для row и col
+    private GameCell[][] playerField;// поле игрока
     private GameCell[][] enemyField;// поле противника
 
     @Override
@@ -165,7 +163,7 @@ public class CellsActivity extends Activity{
                 if (is_exist(i,j) && !field[i][j].isShip){
                     field[i][j].isNear=true;
                     if (field==playerField){
-                        but_cell[i][j].setBackgroundColor(Color.GREEN);
+                        but_cell[i][j].setBackgroundColor(Color.WHITE);
                     }
                 }
             }
@@ -187,13 +185,18 @@ public class CellsActivity extends Activity{
             }
         }
     }
+
+    @TargetApi(Build.VERSION_CODES.M)
     void create_ship(int row, int col, int size) {
         if (can_place(playerField,row,col,size,direction)){
             if (direction.equals("ver")){
                 for (int i=row; i>row-size; i--){
                     playerField[i][col].isShip=true;
                     playerField[i][col].shipSize = size;
-                    cells[i][col].setBackgroundColor(Color.RED);
+                    if (size > 1 && i == row - size + 1)  cells[i][col].setBackgroundResource(R.drawable.ship_nose_vertical);
+                    if (size >= 1 && (i > row - size + 1 && i < row)) cells[i][col].setBackgroundResource(R.drawable.ship_center_vertical);
+                    if (size > 1 && i == row)  cells[i][col].setBackgroundResource(R.drawable.ship_back_vertical);
+                    if (size == 1) cells[i][col].setBackgroundResource(R.drawable.small_ver);
                     //todo сделать отрисовку на поле
                     neighbours(i,col,playerField, cells);
                 }
@@ -201,7 +204,10 @@ public class CellsActivity extends Activity{
                 for (int i=col; i<col+size; i++){
                     playerField[row][i].isShip=true;
                     playerField[row][i].shipSize = size;
-                    cells[row][i].setBackgroundColor(Color.RED);
+                    if (size > 1 && i == col + size - 1)  cells[row][i].setBackgroundResource(R.drawable.ship_nose_horizontal);
+                    if (size >= 1 && (i < col + size - 1 && i > col)) cells[row][i].setBackgroundResource(R.drawable.ship_center_horizontal);
+                    if (size > 1 && i == col)  cells[row][i].setBackgroundResource(R.drawable.ship_back_horizontal);
+                    if (size == 1) cells[row][i].setBackgroundResource(R.drawable.small_hor);
                     neighbours(row, i, playerField, cells);
                 }
             }
@@ -211,13 +217,14 @@ public class CellsActivity extends Activity{
             Stub.show(context,"Выберите другую клетку");
         }
         if (check_end_of_build()){
-            //todo сделать перерисовку поля
             //todo наложить текстуры
             // todo вывести фразу
             for (int i=0; i<HEIGHT; i++){
                 for (int j=0; j<WIDTH; j++){
-                    if (playerField[i][j].isNear && !playerField[i][j].isShip)
+                    if (playerField[i][j].isNear && !playerField[i][j].isShip) {
                         cells[i][j].setBackgroundColor(Color.WHITE);
+                        cells[i][j].setBackgroundColor(getColor(R.color.SEA));
+                    }
                 }
             }
             phase="yourTurn";
@@ -256,7 +263,7 @@ public class CellsActivity extends Activity{
         /*При повороте корабля он пропадает в поле и перерисовывается в интерфейсе*/
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                menu[i][j].setBackgroundColor(Color.WHITE);
+                if (i == 3 || j == 0)menu[i][j].setBackgroundColor(Color.WHITE);
                 if (countShipPlace < 10) {
                     if ((i == 0 && j == 0) || (i == 3 && j == 3)) continue;
                 }
@@ -293,7 +300,7 @@ public class CellsActivity extends Activity{
             if (enemyField[row][col].isShip) {
                 enemyField[row][col].isFired = true;
                 enemyField[row][col].opened = true;
-                cellsEnemy[row][col].setBackgroundColor(Color.BLACK);
+                cellsEnemy[row][col].setBackgroundResource(R.drawable.popadanie);
                 rewrite_size_ship(enemyField, row, col);
                 if (enemyField[row][col].shipSize == 0) {
                     Stub.show(context, "корабль потоплен");
@@ -314,6 +321,19 @@ public class CellsActivity extends Activity{
         /*Обработка выстрела игрока по полю противника
         * Информационное составляющее поля противника должно быть изменено
         * При попадании не менять ход*/
+    }
+
+    void showDistructedShip(int row, int col) {
+        cellsEnemy[row][col].setBackgroundResource(R.drawable.oblomki);
+        for (int i = row - 1; i <= row+1; i++) {
+            for (int j= col -1; j <=col+1; j++) {
+                if (is_exist(i, j) && enemyField[i][j].isShip && !enemyField[i][j].isShown) {
+                    enemyField[i][j].isShown = true;
+                    cellsEnemy[i][j].setBackgroundResource(R.drawable.oblomki);
+                    showDistructedShip(i, j);
+                }
+            }
+        }
     }
 
     void rewrite_size_ship(GameCell[][] field, int row, int col) {
@@ -410,6 +430,7 @@ public class CellsActivity extends Activity{
     int pretend_turn_i=0;
     int pretend_turn_j=0;
     int sum_pretend=-1;
+
     void first_hit_choose_pretend(){
         for (int i=turn_i-1; i<=turn_i+1; i++){
             for (int j=turn_j-1; j<=turn_j+1; j++){
@@ -477,7 +498,7 @@ public class CellsActivity extends Activity{
         mas_for_choose_tap[rand_choose] = -1;
         cells[temp_turn_i][temp_turn_j].setBackgroundColor(Color.GRAY);
         if (playerField[temp_turn_i][temp_turn_j].isShip) {
-            cells[temp_turn_i][temp_turn_j].setBackgroundColor(Color.BLACK);
+            cells[temp_turn_i][temp_turn_j].setBackgroundColor(getColor(R.color.hit));
             pretend_turn_i = temp_turn_i;
             pretend_turn_j = temp_turn_j;
             sum_hit++;
@@ -534,7 +555,7 @@ public class CellsActivity extends Activity{
                 playerField[temp_turn_i][temp_turn_j].isFired=true;
                 cells[temp_turn_i][temp_turn_j].setBackgroundColor(Color.GRAY);
                 if (playerField[temp_turn_i][temp_turn_j].isShip){
-                    cells[temp_turn_i][temp_turn_j].setBackgroundColor(Color.BLACK);
+                    cells[temp_turn_i][temp_turn_j].setBackgroundColor(getColor(R.color.hit));
                     if (playerField[temp_turn_i][temp_turn_j].shipSize == 1){
                         reset_n_1(temp_turn_i, temp_turn_j);
                         hit=false;
@@ -578,7 +599,15 @@ public class CellsActivity extends Activity{
             for (int j = 0; j < 4; j++) {
                 menu[i][j] = (Button) inflater.inflate(R.layout.cell, cellsMenu, false);
                 if (i != 3 && j != 0) {
-                    menu[i][j].setText("R");
+                    if (i == 0 && j == 1) menu[i][j].setBackgroundResource(R.drawable.rotate_button_11);
+                    if (i == 0 && j == 2) menu[i][j].setBackgroundResource(R.drawable.rotate_button_12);
+                    if (i == 0 && j == 3) menu[i][j].setBackgroundResource(R.drawable.rotate_button_13);
+                    if (i == 1 && j == 1) menu[i][j].setBackgroundResource(R.drawable.rotate_button_21);
+                    if (i == 1 && j == 2) menu[i][j].setBackgroundResource(R.drawable.rotate_button_22);
+                    if (i == 1 && j == 3) menu[i][j].setBackgroundResource(R.drawable.rotate_button_23);
+                    if (i == 2 && j == 1) menu[i][j].setBackgroundResource(R.drawable.rotate_button_31);
+                    if (i == 2 && j == 2) menu[i][j].setBackgroundResource(R.drawable.rotate_button_32);
+                    if (i == 2 && j == 3) menu[i][j].setBackgroundResource(R.drawable.rotate_button_33);
                     OnClickListener clickListenerForReverse = new OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -613,23 +642,23 @@ public class CellsActivity extends Activity{
             for (int j = -1; j < WIDTH; j++) {
                 if (i == -1) {
                     indexHorizontal[j + 1] = (Button) inflater.inflate(R.layout.cell, cellsLayout, false);
-                    indexHorizontal[j+1].setText(Integer.toString(j+1));
                     indexHorizontal[j+1].setTag(i + "," + j);
+                    indexHorizontal[j+1].setBackgroundColor(Color.WHITE);
                     cellsLayout.addView(indexHorizontal[j + 1]);
                     indexHorizontalEnemy[j + 1] = (Button) inflater.inflate(R.layout.cell, cellsLayout, false);
-                    indexHorizontalEnemy[j+1].setText(Integer.toString(j+1));
                     indexHorizontalEnemy[j+1].setTag(i + "," + j);
+                    indexHorizontalEnemy[j+1].setBackgroundColor(Color.WHITE);
                     cellsLayoutEnemy.addView(indexHorizontalEnemy[j + 1]);
                     continue;
                 }
                 if (j == -1 && i > -1) {
                     indexVertical[i + 1] = (Button) inflater.inflate(R.layout.cell, cellsLayout, false);
-                    indexVertical[i+1].setText(Integer.toString(i+1));
                     indexVertical[i+1].setTag(i + "," + j);
+                    indexVertical[i+1].setBackgroundColor(Color.WHITE);
                     cellsLayout.addView(indexVertical[i + 1]);
                     indexVerticalEnemy[i + 1] = (Button) inflater.inflate(R.layout.cell, cellsLayout, false);
-                    indexVerticalEnemy[i+1].setText(Integer.toString(i+1));
                     indexVerticalEnemy[i+1].setTag(i + "," + j);
+                    indexVerticalEnemy[i+1].setBackgroundColor(Color.WHITE);
                     cellsLayoutEnemy.addView(indexVerticalEnemy[i + 1]);
                     continue;
                 }
@@ -700,6 +729,50 @@ public class CellsActivity extends Activity{
                 cellsEnemy[i][j].setTag(i + "," + j);
                 cellsLayoutEnemy.addView(cellsEnemy[i][j]);
             }
+
+        indexHorizontal[1].setBackgroundResource(R.drawable.playera);
+        indexHorizontal[2].setBackgroundResource(R.drawable.playerb);
+        indexHorizontal[3].setBackgroundResource(R.drawable.playerc);
+        indexHorizontal[4].setBackgroundResource(R.drawable.playerd);
+        indexHorizontal[5].setBackgroundResource(R.drawable.playere);
+        indexHorizontal[6].setBackgroundResource(R.drawable.playerf);
+        indexHorizontal[7].setBackgroundResource(R.drawable.playerg);
+        indexHorizontal[8].setBackgroundResource(R.drawable.playerh);
+        indexHorizontal[9].setBackgroundResource(R.drawable.playeri);
+        indexHorizontal[10].setBackgroundResource(R.drawable.playerj);
+
+        indexVertical[1].setBackgroundResource(R.drawable.player1);
+        indexVertical[2].setBackgroundResource(R.drawable.player2);
+        indexVertical[3].setBackgroundResource(R.drawable.player3);
+        indexVertical[4].setBackgroundResource(R.drawable.player4);
+        indexVertical[5].setBackgroundResource(R.drawable.player5);
+        indexVertical[6].setBackgroundResource(R.drawable.player6);
+        indexVertical[7].setBackgroundResource(R.drawable.player7);
+        indexVertical[8].setBackgroundResource(R.drawable.player8);
+        indexVertical[9].setBackgroundResource(R.drawable.player9);
+        indexVertical[10].setBackgroundResource(R.drawable.player10);
+
+        indexHorizontalEnemy[1].setBackgroundResource(R.drawable.enemya);
+        indexHorizontalEnemy[2].setBackgroundResource(R.drawable.enemyb);
+        indexHorizontalEnemy[3].setBackgroundResource(R.drawable.enemyc);
+        indexHorizontalEnemy[4].setBackgroundResource(R.drawable.enemyd);
+        indexHorizontalEnemy[5].setBackgroundResource(R.drawable.enemye);
+        indexHorizontalEnemy[6].setBackgroundResource(R.drawable.enemyf);
+        indexHorizontalEnemy[7].setBackgroundResource(R.drawable.enemyg);
+        indexHorizontalEnemy[8].setBackgroundResource(R.drawable.enemyh);
+        indexHorizontalEnemy[9].setBackgroundResource(R.drawable.enemyi);
+        indexHorizontalEnemy[10].setBackgroundResource(R.drawable.enemyj);
+
+        indexVerticalEnemy[1].setBackgroundResource(R.drawable.enemy1);
+        indexVerticalEnemy[2].setBackgroundResource(R.drawable.enemy2);
+        indexVerticalEnemy[3].setBackgroundResource(R.drawable.enemy3);
+        indexVerticalEnemy[4].setBackgroundResource(R.drawable.enemy4);
+        indexVerticalEnemy[5].setBackgroundResource(R.drawable.enemy5);
+        indexVerticalEnemy[6].setBackgroundResource(R.drawable.enemy6);
+        indexVerticalEnemy[7].setBackgroundResource(R.drawable.enemy7);
+        indexVerticalEnemy[8].setBackgroundResource(R.drawable.enemy8);
+        indexVerticalEnemy[9].setBackgroundResource(R.drawable.enemy9);
+        indexVerticalEnemy[10].setBackgroundResource(R.drawable.enemy10);
     }
 
     void update() {
