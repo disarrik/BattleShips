@@ -305,6 +305,7 @@ public class CellsActivity extends Activity{
                 rewrite_size_ship(enemyField, row, col);
                 if (enemyField[row][col].shipSize == 0) {
                     Stub.show(context, "корабль потоплен");
+                    showDistructedShip(row, col);
                     enemyShips--;
                 }
                 // todo сделать проверку на потопление или подьитие
@@ -486,6 +487,7 @@ public class CellsActivity extends Activity{
             }
         }
     }
+    @TargetApi(Build.VERSION_CODES.M)
     void choose_cell_for_shoot() {
         /*Выбор ячейки для хода противника*/
         Random random = new Random();

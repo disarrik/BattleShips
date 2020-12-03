@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-#Thu Dec 03 16:16:43 MSK 2020
-base.0=C\:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\out\\classes.dex
-=======
-#Thu Dec 03 18:58:58 MSK 2020
-base.0=D\:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
->>>>>>> master
+#Thu Dec 03 20:12:42 MSK 2020
+base.0=C\:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex

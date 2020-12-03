@@ -1,10 +1,27 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
+            "outputFile": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
             "map": [
                 {
-                    "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\values\\colors.xml",
+                    "source": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\src\\main\\res\\values\\strings.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "57",
+                        "endColumns": "42",
+                        "endOffsets": "95"
+                    },
+                    "to": {
+                        "startLines": "4",
+                        "startColumns": "4",
+                        "startOffsets": "133",
+                        "endColumns": "42",
+                        "endOffsets": "171"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\src\\main\\res\\values\\colors.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",
@@ -21,7 +38,7 @@
                     }
                 },
                 {
-                    "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\values\\styles.xml",
+                    "source": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\src\\main\\res\\values\\styles.xml",
                     "from": {
                         "startLines": "6,15",
                         "startColumns": "4,4",
@@ -37,23 +54,6 @@
                         "endLines": "11,14",
                         "endColumns": "12,12",
                         "endOffsets": "462,622"
-                    }
-                },
-                {
-                    "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\values\\strings.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "57",
-                        "endColumns": "42",
-                        "endOffsets": "95"
-                    },
-                    "to": {
-                        "startLines": "4",
-                        "startColumns": "4",
-                        "startOffsets": "133",
-                        "endColumns": "42",
-                        "endOffsets": "171"
                     }
                 }
             ]
