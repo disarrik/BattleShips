@@ -486,16 +486,15 @@ public class CellsActivity extends Activity{
             if (sum_hit == playerField[temp_turn_i][temp_turn_j].shipSize) {
                 reset_neighbours(sum_hit); //функция, которая делает всех соседей обстрелянными
                 hit = false;
-                enemy_shot();
                 //todo анимация потопления корабля
             } else {
                 if (sum_hit == 2)
                     delete_pretend();
                 add_and_verify_pretend();
-                enemy_shot();
+
                 //todo отрисовка анимации попадания
             }
-
+            enemy_shot();
         } else {
             phase = "yourTurn";
         }
