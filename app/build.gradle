@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "ru.samsung.itschool.book.cells"
-        minSdkVersion 23
+        minSdkVersion 14
         targetSdkVersion 29
     }
 

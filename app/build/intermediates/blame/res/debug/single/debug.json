@@ -1,26 +1,274 @@
 [
     {
-        "merged": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\layout_cell.xml.flat",
-        "source": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\src\\main\\res\\layout\\cell.xml"
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ship_center_hor_injured.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\ship_center_hor_injured.png"
     },
     {
-        "merged": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ship_nose.png.flat",
-        "source": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\src\\main\\res\\drawable\\ship_nose.png"
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_playera.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\playera.png"
     },
     {
-        "merged": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\layout_cells.xml.flat",
-        "source": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\src\\main\\res\\layout\\cells.xml"
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_launcher.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ship_center.png.flat",
-        "source": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\src\\main\\res\\drawable\\ship_center.png"
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_playerh.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\playerh.png"
     },
     {
-        "merged": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_launcher.png.flat",
-        "source": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\src\\main\\res\\drawable\\ic_launcher.png"
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_enemyf.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\enemyf.png"
     },
     {
-        "merged": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ship_back.png.flat",
-        "source": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\src\\main\\res\\drawable\\ship_back.png"
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_popadanie.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\popadanie.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_enemy7.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\enemy7.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_player6.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\player6.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_playere.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\playere.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ship_center_injured.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\ship_center_injured.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_enemyj.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\enemyj.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_rotate_button_11.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\rotate_button_11.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_player2.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\player2.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ship_back_horizontal.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\ship_back_horizontal.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ship_back_injured.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\ship_back_injured.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_enemyc.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\enemyc.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\layout_cells.xml.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\layout\\cells.xml"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_small_ver.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\small_ver.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_oblomki.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\oblomki.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_player9.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\player9.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ship_center_vertical.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\ship_center_vertical.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ship_nose_injured.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\ship_nose_injured.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ship_back_vertical.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\ship_back_vertical.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ship_nose_hor_injured.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\ship_nose_hor_injured.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_playerb.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\playerb.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_enemy1.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\enemy1.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_player7.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\player7.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_rotate_button_22.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\rotate_button_22.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_enemy8.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\enemy8.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_playeri.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\playeri.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_enemy4.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\enemy4.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ship_nose_vertical.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\ship_nose_vertical.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_player3.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\player3.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_enemyg.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\enemyg.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ship_center_horizontal.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\ship_center_horizontal.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_rotate_button_31.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\rotate_button_31.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_playerf.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\playerf.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ship_nose_horizontal.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\ship_nose_horizontal.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_rotate_button_12.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\rotate_button_12.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_player10.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\player10.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_enemy9.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\enemy9.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_rotate_button_13.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\rotate_button_13.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_playerj.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\playerj.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_enemyd.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\enemyd.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_playerc.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\playerc.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_rotate_button_21.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\rotate_button_21.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_enemy2.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\enemy2.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_enemy5.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\enemy5.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_enemya.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\enemya.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_playerg.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\playerg.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_enemyh.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\enemyh.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_rotate_button_32.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\rotate_button_32.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_player4.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\player4.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_rotate_button_33.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\rotate_button_33.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_player5.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\player5.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_enemy3.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\enemy3.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_small_hor.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\small_hor.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\layout_cell.xml.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\layout\\cell.xml"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_enemye.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\enemye.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_player1.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\player1.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_enemyi.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\enemyi.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_enemy6.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\enemy6.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_playerd.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\playerd.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_rotate_button_23.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\rotate_button_23.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_player8.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\player8.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_enemy10.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\enemy10.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ship_back_hor_injured.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\ship_back_hor_injured.png"
+    },
+    {
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_enemyb.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\enemyb.png"
     }
 ]

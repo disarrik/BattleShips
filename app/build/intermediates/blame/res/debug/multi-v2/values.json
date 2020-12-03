@@ -1,27 +1,27 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
+            "outputFile": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\src\\main\\res\\values\\strings.xml",
+                    "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\values\\colors.xml",
                     "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "57",
-                        "endColumns": "42",
-                        "endOffsets": "95"
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "57,96",
+                        "endColumns": "37,39",
+                        "endOffsets": "90,131"
                     },
                     "to": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "42",
-                        "endOffsets": "93"
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,93",
+                        "endColumns": "37,39",
+                        "endOffsets": "88,128"
                     }
                 },
                 {
-                    "source": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\src\\main\\res\\values\\styles.xml",
+                    "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\values\\styles.xml",
                     "from": {
                         "startLines": "6,15",
                         "startColumns": "4,4",
@@ -31,12 +31,29 @@
                         "endOffsets": "484,682"
                     },
                     "to": {
-                        "startLines": "3,10",
+                        "startLines": "5,12",
                         "startColumns": "4,4",
-                        "startOffsets": "98,389",
-                        "endLines": "9,12",
+                        "startOffsets": "176,467",
+                        "endLines": "11,14",
                         "endColumns": "12,12",
-                        "endOffsets": "384,544"
+                        "endOffsets": "462,622"
+                    }
+                },
+                {
+                    "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\values\\strings.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "57",
+                        "endColumns": "42",
+                        "endOffsets": "95"
+                    },
+                    "to": {
+                        "startLines": "4",
+                        "startColumns": "4",
+                        "startOffsets": "133",
+                        "endColumns": "42",
+                        "endOffsets": "171"
                     }
                 }
             ]
