@@ -28,7 +28,7 @@ public class CellsActivity extends Activity{
     private int count_ship_for_enemy=10;
     private long frame = 0;
     private long enemyStartFrame = -61;
-    private long enemyFramePeriod = 60;
+    private long enemyFramePeriod = 30;
 
     private Button[][] cellsEnemy;
     private Button[][] cells;
@@ -291,7 +291,8 @@ public class CellsActivity extends Activity{
                 enemyField[row][col].opened = true;
                 cellsEnemy[row][col].setBackgroundColor(Color.BLACK);
                 rewrite_size_ship(enemyField, row, col);
-                if (enemyField[row][col].shipSize == 0) Stub.show(context, "корабль потоплен");
+                if (enemyField[row][col].shipSize == 0)
+                    Stub.show(context, "корабль потоплен");
                 // todo сделать проверку на потопление или подьитие
             }
             else {
@@ -300,7 +301,6 @@ public class CellsActivity extends Activity{
                 phase = "botTurn";
                 cellsEnemy[row][col].setBackgroundColor(Color.GRAY);
                 enemyStartFrame = frame;
-                // enemy_shot();
             }
         }
 
@@ -456,9 +456,9 @@ public class CellsActivity extends Activity{
         int temp_turn_i = mas_for_choose_tap[rand_choose] / 10;
         int temp_turn_j = mas_for_choose_tap[rand_choose] % 10;
 
+
         playerField[temp_turn_i][temp_turn_j].isFired = true;
         mas_for_choose_tap[rand_choose] = -1;
-        //sum_pretend--;
         cells[temp_turn_i][temp_turn_j].setBackgroundColor(Color.GRAY);
         if (playerField[temp_turn_i][temp_turn_j].isShip) {
             cells[temp_turn_i][temp_turn_j].setBackgroundColor(Color.BLACK);
@@ -477,7 +477,6 @@ public class CellsActivity extends Activity{
                 //todo отрисовка анимации попадания
             }
             enemyStartFrame = frame;
-            //enemy_shot();
         } else {
             phase = "yourTurn";
         }
@@ -531,7 +530,6 @@ public class CellsActivity extends Activity{
                         first_hit_choose_pretend();
                     }
                     enemyStartFrame = frame;
-                    // enemy_shot();
                 }
                 else{
                     phase = "yourTurn";
@@ -687,7 +685,6 @@ public class CellsActivity extends Activity{
         frame++;
         if (frame == enemyStartFrame + enemyFramePeriod) {
             enemy_shot();
-            //Stub.show(context, Long.toString(frame));
         }
     }
 
@@ -695,7 +692,7 @@ public class CellsActivity extends Activity{
     {
         MyTimer()
         {
-            super(100000, 20);
+            super(1000000000, 20);
         }
         @Override
         public void onTick(long millisUntilFinished) {

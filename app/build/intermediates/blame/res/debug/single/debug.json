@@ -1,26 +1,26 @@
 [
     {
-        "merged": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\layout_cell.xml.flat",
-        "source": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\src\\main\\res\\layout\\cell.xml"
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ship_center.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\ship_center.png"
     },
     {
-        "merged": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ship_nose.png.flat",
-        "source": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\src\\main\\res\\drawable\\ship_nose.png"
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_launcher.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\layout_cells.xml.flat",
-        "source": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\src\\main\\res\\layout\\cells.xml"
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ship_nose.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\ship_nose.png"
     },
     {
-        "merged": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ship_center.png.flat",
-        "source": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\src\\main\\res\\drawable\\ship_center.png"
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ship_back.png.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\drawable\\ship_back.png"
     },
     {
-        "merged": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_launcher.png.flat",
-        "source": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\src\\main\\res\\drawable\\ic_launcher.png"
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\layout_cell.xml.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\layout\\cell.xml"
     },
     {
-        "merged": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ship_back.png.flat",
-        "source": "C:\\Users\\user\\Desktop\\IT_Academy\\android\\Github\\BattleShips\\app\\src\\main\\res\\drawable\\ship_back.png"
+        "merged": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\build\\intermediates\\res\\merged\\debug\\layout_cells.xml.flat",
+        "source": "D:\\PenzaStreetCompany\\Android\\BattleShips\\app\\src\\main\\res\\layout\\cells.xml"
     }
 ]
