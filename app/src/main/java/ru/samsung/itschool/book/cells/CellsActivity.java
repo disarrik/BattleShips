@@ -452,12 +452,12 @@ public class CellsActivity extends Activity{
 
         playerField[temp_turn_i][temp_turn_j].isFired = true;
         mas_for_choose_tap[rand_choose] = -1;
-        sum_pretend--;
         cells[temp_turn_i][temp_turn_j].setBackgroundColor(Color.GRAY);
         if (playerField[temp_turn_i][temp_turn_j].isShip) {
             cells[temp_turn_i][temp_turn_j].setBackgroundColor(Color.BLACK);
             pretend_turn_i = temp_turn_i;
             pretend_turn_j = temp_turn_j;
+
             sum_hit++;
             if (sum_hit == playerField[temp_turn_i][temp_turn_j].shipSize) {
                 reset_neighbours(sum_hit); //функция, которая делает всех соседей обстрелянными
@@ -507,11 +507,13 @@ public class CellsActivity extends Activity{
                 int k = random.nextInt(sum_suitable_cell+1);
                 int temp_turn_i=mas_check_for_bot[k]/10;
                 int temp_turn_j=mas_check_for_bot[k]%10;
+
                 playerField[temp_turn_i][temp_turn_j].isFired=true;
                 cells[temp_turn_i][temp_turn_j].setBackgroundColor(Color.GRAY);
                 if (playerField[temp_turn_i][temp_turn_j].isShip){
                     cells[temp_turn_i][temp_turn_j].setBackgroundColor(Color.BLACK);
                     if (playerField[temp_turn_i][temp_turn_j].shipSize == 1){
+
                         reset_n_1(temp_turn_i, temp_turn_j);
                         hit=false;
                     }else{
