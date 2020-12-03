@@ -74,7 +74,6 @@ public class CellsActivity extends Activity{
     }
 
     void generate() {
-        System.out.println("AAAA");
         phase = "build";
         playerField = new GameCell[HEIGHT][WIDTH];
         enemyField = new GameCell[HEIGHT][WIDTH];
@@ -779,7 +778,6 @@ public class CellsActivity extends Activity{
 
     void update() {
         frame++;
-        System.out.println(frame);
         if (frame == enemyStartFrame + enemyFramePeriod) {
             enemy_shot();
         }
