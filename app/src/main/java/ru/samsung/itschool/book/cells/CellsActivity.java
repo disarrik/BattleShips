@@ -149,11 +149,6 @@ public class CellsActivity extends Activity{
             }
             create_ship_enemy(rand_row, rand_col,size_enemy_ship, choose_direction_for_enemy);
         }
-
-        // рандомно выбирать вертикальное или горизонатльно направление
-        //затем рандомно клетку до тех пока она не разрешить постановку
-        //count_ship_for_enemy--;
-        //вызывать neighbours;
     }
     void neighbours(int row, int col, GameCell[][] field, Button[][] but_cell){//установка соседей
         for (int i=row-1; i<=row+1; i++){
@@ -163,7 +158,6 @@ public class CellsActivity extends Activity{
                     if (field==playerField){
                         but_cell[i][j].setBackgroundColor(Color.GREEN);
                     }
-//                    but_cell[i][j].setBackgroundColor(Color.GREEN);
                 }
             }
         }
@@ -173,8 +167,6 @@ public class CellsActivity extends Activity{
             for (int i=row; i>row-size; i--){
                 enemyField[i][col].isShip=true;
                 enemyField[i][col].shipSize = size;
-//                cellsEnemy[i][col].setText(Integer.toString(enemyField[i][col].shipSize));
-//                cellsEnemy[i][col].setBackgroundColor(Color.RED);
                 //todo сделать отрисовку на поле
                 neighbours(i,col,enemyField,  cellsEnemy);
             }
@@ -182,8 +174,6 @@ public class CellsActivity extends Activity{
             for (int i = col; i < col + size; i++) {
                 enemyField[row][i].isShip = true;
                 enemyField[row][i].shipSize = size;
-//                cellsEnemy[row][i].setBackgroundColor(Color.RED);
-//                cellsEnemy[row][i].setText(Integer.toString(size));
                 neighbours(row, i, enemyField, cellsEnemy);
             }
         }
@@ -213,7 +203,7 @@ public class CellsActivity extends Activity{
         }
         if (check_end_of_build()){
             //todo сделать перерисовку поля
-            //todo убрать зеленые клетки, наложить текстуры
+            //todo наложить текстуры
             // todo вывести фразу
             for (int i=0; i<HEIGHT; i++){
                 for (int j=0; j<WIDTH; j++){
@@ -253,18 +243,6 @@ public class CellsActivity extends Activity{
             return check;
         }
     }
-//    int[][] get_free_cells(GameCell[][] field) {
-//        /*Возвращает индексы ячеек у которых рядом нет кораблей первая первая размерность - ячейки
-//        * ячейка 1: row1, col1
-//        * ячейка 2: row2, col2
-//        * ...*/
-//        return new int[0][0];
-//    }
-//
-//    void close_cells_for_building(GameCell[][] field, int size, String direction) {
-//        /*Закрывает для нажатия определённые кнопки при расстановке корабля с определённым и
-//        размером и направлением*/
-//    }
     void redraw_ship() {
         /*При повороте корабля он пропадает в поле и перерисовывается в интерфейсе*/
         for (int i = 0; i < 4; i++) {
@@ -334,7 +312,6 @@ public class CellsActivity extends Activity{
             if (is_exist(row, col - 1) && field[row][col-1].shipSize > field[row][col].shipSize) rewrite_size_ship(field, row , col -1);
         }
     }
-
     void check_win() {
         /*Проверяется выигрыш одного из игроков*/
     }
@@ -469,44 +446,34 @@ public class CellsActivity extends Activity{
         /*Выбор ячейки для хода противника*/
         Random random = new Random();
         sort_mas_for_choose();
-        if (sum_pretend==-1)
-            Stub.show(context, Integer.toString(sum_pretend)+" "+Integer.toString(sum_hit)+ " "+Integer.toString(mas_for_choose_tap[0])+ " "+ Integer.toString(mas_for_choose_tap[1])+ " "+Integer.toString(mas_for_choose_tap[2])+ " "+Integer.toString(mas_for_choose_tap[3]));
-        else {
-            int rand_choose = random.nextInt(sum_pretend + 1);
-            int temp_turn_i = mas_for_choose_tap[rand_choose] / 10;
-            int temp_turn_j = mas_for_choose_tap[rand_choose] % 10;
-            if (temp_turn_j==-1)
-                Stub.show(context, Integer.toString(sum_pretend)+" "+Integer.toString(sum_hit)+ " "+Integer.toString(mas_for_choose_tap[0])+ " "+ Integer.toString(mas_for_choose_tap[1])+ " "+Integer.toString(mas_for_choose_tap[2])+ " "+Integer.toString(mas_for_choose_tap[3]));
-            else{
-                playerField[temp_turn_i][temp_turn_j].isFired = true;
-                mas_for_choose_tap[rand_choose] = -1;
-                sum_pretend--;
-                cells[temp_turn_i][temp_turn_j].setBackgroundColor(Color.GRAY);
-                if (playerField[temp_turn_i][temp_turn_j].isShip) {
-                    cells[temp_turn_i][temp_turn_j].setBackgroundColor(Color.BLACK);
-                    pretend_turn_i = temp_turn_i;
-                    pretend_turn_j = temp_turn_j;
-                    sum_hit++;
-                    if (sum_hit == playerField[temp_turn_i][temp_turn_j].shipSize) {
-                        reset_neighbours(sum_hit); //функция, которая делает всех соседей обстрелянными
-                        hit = false;
-                        enemy_shot();
-                        //дописать обнуление необходимых параметров
-                        //пустой ли массив для выбора хода бота к этому моменту?
-                        //todo анимация потопления корабля
-                    } else {
-                        if (sum_hit == 2)
-                            delete_pretend();
-                        add_and_verify_pretend();
-                        enemy_shot();//это сработает только если было попадание
-                        //todo отрисовка анимации попадания
-                    }
+        int rand_choose = random.nextInt(sum_pretend + 1);
+        int temp_turn_i = mas_for_choose_tap[rand_choose] / 10;
+        int temp_turn_j = mas_for_choose_tap[rand_choose] % 10;
 
-                } else {
-                    phase = "botTurn";
-                    enemy_shot();
-                }
+        playerField[temp_turn_i][temp_turn_j].isFired = true;
+        mas_for_choose_tap[rand_choose] = -1;
+        sum_pretend--;
+        cells[temp_turn_i][temp_turn_j].setBackgroundColor(Color.GRAY);
+        if (playerField[temp_turn_i][temp_turn_j].isShip) {
+            cells[temp_turn_i][temp_turn_j].setBackgroundColor(Color.BLACK);
+            pretend_turn_i = temp_turn_i;
+            pretend_turn_j = temp_turn_j;
+            sum_hit++;
+            if (sum_hit == playerField[temp_turn_i][temp_turn_j].shipSize) {
+                reset_neighbours(sum_hit); //функция, которая делает всех соседей обстрелянными
+                hit = false;
+                enemy_shot();
+                //todo анимация потопления корабля
+            } else {
+                if (sum_hit == 2)
+                    delete_pretend();
+                add_and_verify_pretend();
+                enemy_shot();
+                //todo отрисовка анимации попадания
             }
+
+        } else {
+            phase = "yourTurn";
         }
     }
     int sum_suitable_cell=-1, turn_i, turn_j, sum_hit=0;
@@ -527,11 +494,7 @@ public class CellsActivity extends Activity{
             mas_for_choose_tap[i]=-1;
         }
     }
-
     void enemy_shot() {
-        /*Обработка выстрела противника по полю игрока
-        * Информация меняется
-        * При попадании не менять ход*/
         //todo задержка?
         if (hit) {
             choose_cell_for_shoot();
@@ -564,11 +527,9 @@ public class CellsActivity extends Activity{
                     enemy_shot();
                 }
                 else{
-                    phase = "botTurn";
-                    enemy_shot();
+                    phase = "yourTurn";
                 }
             }
-
         }
     }
     /**Конец бота*/
