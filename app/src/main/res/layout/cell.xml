@@ -2,7 +2,7 @@
 <Button xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="24dp"
     android:layout_height="24dp"
-    android:background="#2196F3"
+    android:background="#5b6ee1"
     
     android:textColor="@android:color/black"
     android:textSize="12sp"

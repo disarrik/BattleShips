@@ -1,9 +1,11 @@
 package ru.samsung.itschool.book.cells;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 
 import android.os.CountDownTimer;
@@ -41,6 +43,7 @@ public class CellsActivity extends Activity{
     // TODO: 01.12.2020 Интерфейс говно - надо доработатть
     protected class GameCell {
         public boolean opened = false; // открыта ли ячейка
+        public boolean isShown = false;
         public boolean isFired = false; // стреляли
         public boolean isShip = false; // стоит ли корабль
         public boolean isNear = false; // стоит ли корабль рядом
@@ -151,7 +154,7 @@ public class CellsActivity extends Activity{
                 if (is_exist(i,j) && !field[i][j].isShip){
                     field[i][j].isNear=true;
                     if (field==playerField){
-                        but_cell[i][j].setBackgroundColor(Color.GREEN);
+                        but_cell[i][j].setBackgroundColor(Color.WHITE);
                     }
                 }
             }
@@ -174,6 +177,7 @@ public class CellsActivity extends Activity{
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.M)
     void create_ship(int row, int col, int size) {
         if (can_place(playerField,row,col,size,direction)){
             if (direction.equals("ver")){
@@ -183,7 +187,7 @@ public class CellsActivity extends Activity{
                     if (size > 1 && i == row - size + 1)  cells[i][col].setBackgroundResource(R.drawable.ship_nose_vertical);
                     if (size >= 1 && (i > row - size + 1 && i < row)) cells[i][col].setBackgroundResource(R.drawable.ship_center_vertical);
                     if (size > 1 && i == row)  cells[i][col].setBackgroundResource(R.drawable.ship_back_vertical);
-                    if (size == 1) cells[i][col].setBackgroundResource(R.drawable.ship_center_vertical);
+                    if (size == 1) cells[i][col].setBackgroundResource(R.drawable.small_ver);
                     //todo сделать отрисовку на поле
                     neighbours(i,col,playerField, cells);
                 }
@@ -194,7 +198,7 @@ public class CellsActivity extends Activity{
                     if (size > 1 && i == col + size - 1)  cells[row][i].setBackgroundResource(R.drawable.ship_nose_horizontal);
                     if (size >= 1 && (i < col + size - 1 && i > col)) cells[row][i].setBackgroundResource(R.drawable.ship_center_horizontal);
                     if (size > 1 && i == col)  cells[row][i].setBackgroundResource(R.drawable.ship_back_horizontal);
-                    if (size == 1) cells[row][i].setBackgroundResource(R.drawable.ship_center_horizontal);
+                    if (size == 1) cells[row][i].setBackgroundResource(R.drawable.small_hor);
                     neighbours(row, i, playerField, cells);
                 }
             }
@@ -209,7 +213,8 @@ public class CellsActivity extends Activity{
             for (int i=0; i<HEIGHT; i++){
                 for (int j=0; j<WIDTH; j++){
                     if (playerField[i][j].isNear && !playerField[i][j].isShip) {
-                        cells[i][j].setBackgroundColor(0xFF2196F3);
+                        cells[i][j].setBackgroundColor(Color.WHITE);
+                        cells[i][j].setBackgroundColor(getColor(R.color.SEA));
                     }
                 }
             }
@@ -249,7 +254,7 @@ public class CellsActivity extends Activity{
         /*При повороте корабля он пропадает в поле и перерисовывается в интерфейсе*/
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                menu[i][j].setBackgroundColor(Color.WHITE);
+                if (i == 3 || j == 0)menu[i][j].setBackgroundColor(Color.WHITE);
                 if (countShipPlace < 10) {
                     if ((i == 0 && j == 0) || (i == 3 && j == 3)) continue;
                 }
@@ -286,9 +291,13 @@ public class CellsActivity extends Activity{
             if (enemyField[row][col].isShip) {
                 enemyField[row][col].isFired = true;
                 enemyField[row][col].opened = true;
-                cellsEnemy[row][col].setBackgroundColor(Color.BLACK);
+                cellsEnemy[row][col].setBackgroundResource(R.drawable.popadanie);
                 rewrite_size_ship(enemyField, row, col);
-                if (enemyField[row][col].shipSize == 0) Stub.show(context, "корабль потоплен");
+                if (enemyField[row][col].shipSize == 0) {
+                    Stub.show(context, "корабль потоплен");
+                    showDistructedShip(row, col);
+                }
+
             }
             else {
                 enemyField[row][col].isFired = true;
@@ -302,6 +311,19 @@ public class CellsActivity extends Activity{
         /*Обработка выстрела игрока по полю противника
         * Информационное составляющее поля противника должно быть изменено
         * При попадании не менять ход*/
+    }
+
+    void showDistructedShip(int row, int col) {
+        cellsEnemy[row][col].setBackgroundResource(R.drawable.oblomki);
+        for (int i = row - 1; i <= row+1; i++) {
+            for (int j= col -1; j <=col+1; j++) {
+                if (is_exist(i, j) && enemyField[i][j].isShip && !enemyField[i][j].isShown) {
+                    enemyField[i][j].isShown = true;
+                    cellsEnemy[i][j].setBackgroundResource(R.drawable.oblomki);
+                    showDistructedShip(i, j);
+                }
+            }
+        }
     }
 
     void rewrite_size_ship(GameCell[][] field, int row, int col) {
@@ -389,6 +411,7 @@ public class CellsActivity extends Activity{
     int pretend_turn_i=0;
     int pretend_turn_j=0;
     int sum_pretend=-1;
+
     void first_hit_choose_pretend(){
         for (int i=turn_i-1; i<=turn_i+1; i++){
             for (int j=turn_j-1; j<=turn_j+1; j++){
@@ -456,7 +479,7 @@ public class CellsActivity extends Activity{
         sum_pretend--;
         cells[temp_turn_i][temp_turn_j].setBackgroundColor(Color.GRAY);
         if (playerField[temp_turn_i][temp_turn_j].isShip) {
-            cells[temp_turn_i][temp_turn_j].setBackgroundColor(Color.BLACK);
+            cells[temp_turn_i][temp_turn_j].setBackgroundColor(getColor(R.color.hit));
             pretend_turn_i = temp_turn_i;
             pretend_turn_j = temp_turn_j;
             sum_hit++;
@@ -512,7 +535,7 @@ public class CellsActivity extends Activity{
                 playerField[temp_turn_i][temp_turn_j].isFired=true;
                 cells[temp_turn_i][temp_turn_j].setBackgroundColor(Color.GRAY);
                 if (playerField[temp_turn_i][temp_turn_j].isShip){
-                    cells[temp_turn_i][temp_turn_j].setBackgroundColor(Color.BLACK);
+                    cells[temp_turn_i][temp_turn_j].setBackgroundColor(getColor(R.color.hit));
                     if (playerField[temp_turn_i][temp_turn_j].shipSize == 1){
                         reset_n_1(temp_turn_i, temp_turn_j);
                         hit=false;
@@ -553,7 +576,15 @@ public class CellsActivity extends Activity{
             for (int j = 0; j < 4; j++) {
                 menu[i][j] = (Button) inflater.inflate(R.layout.cell, cellsMenu, false);
                 if (i != 3 && j != 0) {
-                    menu[i][j].setText("R");
+                    if (i == 0 && j == 1) menu[i][j].setBackgroundResource(R.drawable.rotate_button_11);
+                    if (i == 0 && j == 2) menu[i][j].setBackgroundResource(R.drawable.rotate_button_12);
+                    if (i == 0 && j == 3) menu[i][j].setBackgroundResource(R.drawable.rotate_button_13);
+                    if (i == 1 && j == 1) menu[i][j].setBackgroundResource(R.drawable.rotate_button_21);
+                    if (i == 1 && j == 2) menu[i][j].setBackgroundResource(R.drawable.rotate_button_22);
+                    if (i == 1 && j == 3) menu[i][j].setBackgroundResource(R.drawable.rotate_button_23);
+                    if (i == 2 && j == 1) menu[i][j].setBackgroundResource(R.drawable.rotate_button_31);
+                    if (i == 2 && j == 2) menu[i][j].setBackgroundResource(R.drawable.rotate_button_32);
+                    if (i == 2 && j == 3) menu[i][j].setBackgroundResource(R.drawable.rotate_button_33);
                     OnClickListener clickListenerForReverse = new OnClickListener() {
                         @Override
                         public void onClick(View view) {
