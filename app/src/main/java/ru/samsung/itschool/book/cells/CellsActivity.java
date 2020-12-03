@@ -67,12 +67,14 @@ public class CellsActivity extends Activity{
         makeCells();
         generate();
         MyTimer timer = new MyTimer();
+        System.out.println(timer);
         timer.start();
         playerShips = 10;
         enemyShips = 10;
     }
 
     void generate() {
+        System.out.println("AAAA");
         phase = "build";
         playerField = new GameCell[HEIGHT][WIDTH];
         enemyField = new GameCell[HEIGHT][WIDTH];
@@ -777,6 +779,7 @@ public class CellsActivity extends Activity{
 
     void update() {
         frame++;
+        System.out.println(frame);
         if (frame == enemyStartFrame + enemyFramePeriod) {
             enemy_shot();
         }
