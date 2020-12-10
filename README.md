@@ -21,4 +21,4 @@
 
 Геймплей:
 
-!()[ibb.co/tYhkSZ2 "Интерфейс игры"]
+!()[https://ibb.co/tYhkSZ2]
